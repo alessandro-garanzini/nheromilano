@@ -1,0 +1,66 @@
+services:
+  database:
+    image: postgis/postgis:13-master
+    volumes:
+      - ./data/database:/var/lib/postgresql/data
+    env_file: .env
+    healthcheck:
+      test: ["CMD", "pg_isready", "--host=localhost", "--username=directusnheromilano"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_interval: 5s
+      start_period: 30s
+
+  cache:
+    image: redis:6
+    healthcheck:
+      test: ["CMD-SHELL", "[ $$(redis-cli ping) = 'PONG' ]"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_interval: 5s
+      start_period: 30s
+
+  directus:
+    image: directus/directus:latest
+    ports:
+      - 8055:8055
+    volumes:
+      - ./uploads:/directus/uploads
+      - ./extensions:/directus/extensions
+    depends_on:
+      database:
+        condition: service_healthy
+      cache:
+        condition: service_healthy
+    env_file: .env
+
+  website:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+
+  caddy:
+    image: caddy:latest
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./data/caddy/data:/data
+      - ./data/caddy/config:/config
+    restart: unless-stopped
+
+  portainer:
+    image: portainer/portainer-ce:latest
+    ports:
+      - "9443:9443"
+      - "9000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./data/portainer:/data
+    restart: unless-stopped
