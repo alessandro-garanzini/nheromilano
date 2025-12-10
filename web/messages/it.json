@@ -1,0 +1,107 @@
+{
+  "nav": {
+    "home": "Home",
+    "experiences": "Le Esperienze",
+    "menu": "Menu",
+    "events": "Eventi",
+    "business": "Business",
+    "contacts": "Contatti"
+  },
+  "experiences": {
+    "bakery": "Bakery",
+    "restaurant": "Ristorante",
+    "pizzeria": "Pizzeria",
+    "cocktail": "Cocktail",
+    "title": "Le Nostre Esperienze",
+    "subtitle": "Scopri i diversi volti di Nhero Milano"
+  },
+  "menu": {
+    "title": "Il Nostro Menu",
+    "all": "Tutto",
+    "filter": "Filtra per categoria",
+    "search": "Cerca piatti...",
+    "vegetarian": "Vegetariano",
+    "vegan": "Vegano",
+    "glutenFree": "Senza glutine",
+    "allergens": "Allergeni"
+  },
+  "events": {
+    "title": "Eventi",
+    "upcoming": "Prossimi Eventi",
+    "past": "Eventi Passati",
+    "bookNow": "Prenota",
+    "moreInfo": "Maggiori info",
+    "when": "Quando",
+    "time": "Orario"
+  },
+  "business": {
+    "title": "Il tuo partner per il business",
+    "subtitle": "Eventi, convenzioni, catering aziendale",
+    "services": "I Nostri Servizi",
+    "space": "Lo Spazio",
+    "requestQuote": "Richiedi un Preventivo",
+    "form": {
+      "name": "Nome e Cognome",
+      "company": "Azienda",
+      "email": "Email",
+      "phone": "Telefono",
+      "eventType": "Tipo di evento",
+      "eventDate": "Data indicativa",
+      "guestsNumber": "Numero persone",
+      "notes": "Note",
+      "submit": "Invia richiesta",
+      "success": "Richiesta inviata con successo!",
+      "error": "Errore nell'invio. Riprova più tardi."
+    }
+  },
+  "contacts": {
+    "title": "Contatti",
+    "address": "Indirizzo",
+    "phone": "Telefono",
+    "email": "Email",
+    "hours": "Orari di Apertura",
+    "form": {
+      "title": "Scrivici",
+      "name": "Nome",
+      "email": "Email",
+      "phone": "Telefono",
+      "message": "Messaggio",
+      "submit": "Invia",
+      "success": "Messaggio inviato con successo!",
+      "error": "Errore nell'invio. Riprova più tardi."
+    }
+  },
+  "dock": {
+    "maps": "Mappa",
+    "call": "Chiama",
+    "delivery": "Delivery",
+    "menu": "Menu",
+    "book": "Prenota"
+  },
+  "common": {
+    "readMore": "Scopri di più",
+    "close": "Chiudi",
+    "loading": "Caricamento...",
+    "error": "Si è verificato un errore",
+    "back": "Indietro",
+    "next": "Avanti",
+    "previous": "Precedente",
+    "showAll": "Mostra tutto"
+  },
+  "footer": {
+    "followUs": "Seguici",
+    "legal": "Informazioni Legali",
+    "privacy": "Privacy Policy",
+    "cookie": "Cookie Policy",
+    "copyright": "© {year} Nhero Milano. Tutti i diritti riservati."
+  },
+  "days": {
+    "monday": "Lunedì",
+    "tuesday": "Martedì",
+    "wednesday": "Mercoledì",
+    "thursday": "Giovedì",
+    "friday": "Venerdì",
+    "saturday": "Sabato",
+    "sunday": "Domenica"
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "nav": {
+    "home": "Home",
+    "experiences": "Experiences",
+    "menu": "Menu",
+    "events": "Events",
+    "business": "Business",
+    "contacts": "Contacts"
+  },
+  "experiences": {
+    "bakery": "Bakery",
+    "restaurant": "Restaurant",
+    "pizzeria": "Pizzeria",
+    "cocktail": "Cocktail",
+    "title": "Our Experiences",
+    "subtitle": "Discover the different faces of Nhero Milano"
+  },
+  "menu": {
+    "title": "Our Menu",
+    "all": "All",
+    "filter": "Filter by category",
+    "search": "Search dishes...",
+    "vegetarian": "Vegetarian",
+    "vegan": "Vegan",
+    "glutenFree": "Gluten Free",
+    "allergens": "Allergens"
+  },
+  "events": {
+    "title": "Events",
+    "upcoming": "Upcoming Events",
+    "past": "Past Events",
+    "bookNow": "Book Now",
+    "moreInfo": "More Info",
+    "when": "When",
+    "time": "Time"
+  },
+  "business": {
+    "title": "Your business partner",
+    "subtitle": "Events, conventions, corporate catering",
+    "services": "Our Services",
+    "space": "The Space",
+    "requestQuote": "Request a Quote",
+    "form": {
+      "name": "Full Name",
+      "company": "Company",
+      "email": "Email",
+      "phone": "Phone",
+      "eventType": "Event type",
+      "eventDate": "Indicative date",
+      "guestsNumber": "Number of guests",
+      "notes": "Notes",
+      "submit": "Send request",
+      "success": "Request sent successfully!",
+      "error": "Error sending. Please try again later."
+    }
+  },
+  "contacts": {
+    "title": "Contacts",
+    "address": "Address",
+    "phone": "Phone",
+    "email": "Email",
+    "hours": "Opening Hours",
+    "form": {
+      "title": "Write to us",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "message": "Message",
+      "submit": "Send",
+      "success": "Message sent successfully!",
+      "error": "Error sending. Please try again later."
+    }
+  },
+  "dock": {
+    "maps": "Map",
+    "call": "Call",
+    "delivery": "Delivery",
+    "menu": "Menu",
+    "book": "Book"
+  },
+  "common": {
+    "readMore": "Read more",
+    "close": "Close",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "showAll": "Show all"
+  },
+  "footer": {
+    "followUs": "Follow Us",
+    "legal": "Legal Information",
+    "privacy": "Privacy Policy",
+    "cookie": "Cookie Policy",
+    "copyright": "© {year} Nhero Milano. All rights reserved."
+  },
+  "days": {
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday"
+  }
+}

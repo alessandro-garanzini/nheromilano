@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nhero Milano Website
 
-## Getting Started
+Modern, elegant website for Nhero Milano - Bar, Ristorante, Bakery, and Pizzeria in the heart of Milan.
 
-First, run the development server:
+## 🎨 Design Features
+
+- **Manhattan-style border frame** wrapping the entire site
+- **Floating action dock** with quick access buttons (Maps, Call, Delivery, Menu, Book) - auto-hides on scroll
+- **Smooth scroll animations** with Framer Motion
+- **Full i18n support** (Italian/English) with next-intl
+- **Brand colors**: Green (#393F33), Gold (#c9a962), Vanilla White (#FFFEF9)
+- **Directus CMS integration** for dynamic content management
+
+## 🚀 Tech Stack
+
+- **Framework**: Next.js 16 (App Router)
+- **Styling**: Tailwind CSS v4
+- **CMS**: Directus
+- **Animations**: Framer Motion
+- **i18n**: next-intl
+- **Language**: TypeScript
+- **Icons**: Lucide React
+
+## 🛠️ Setup Instructions
+
+### 1. Environment Variables
+
+Create `.env.local` in the `web/` directory:
+
+```bash
+NEXT_PUBLIC_DIRECTUS_URL=https://cms.nheromilano.garanzini.dev
+DIRECTUS_TOKEN=your-directus-static-token-here
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Run Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit `http://localhost:3000` - it will redirect to `/it` (default locale).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 4. Build for Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## 📄 Key Pages
 
-To learn more about Next.js, take a look at the following resources:
+| Route | Description | CMS Integration |
+|-------|-------------|-----------------|
+| `/` | Homepage with experiences preview | `pages`, `avvisi`, `experiences` |
+| `/esperienze` | Experiences hub | `experiences` |
+| `/esperienze/[slug]` | Individual experience detail | `experiences` |
+| `/menu` | Dynamic menu with filters | `menu_items`, `menu_categories` |
+| `/eventi` | Events listing | `events` |
+| `/eventi/[slug]` | Event detail page | `events` |
+| `/business` | Business services & quote form | `business_services` |
+| `/contatti` | Contact page with form & map | `globals` |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🌐 Internationalization
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Default locale: Italian (`it`)
+- Supported locales: Italian (`it`), English (`en`)
+- Routes: `/it/...` and `/en/...`
+- Language switcher in navigation
 
-## Deploy on Vercel
+## 🎯 Floating Dock Actions
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The dock provides quick access to:
+1. **Maps** - Opens Google Maps location
+2. **Call** - Direct phone call
+3. **Delivery** - Link to delivery service
+4. **Menu** - Navigate to menu page
+5. **Book** - Reservation link
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Auto-hides when scrolling down, reappears when scrolling up.
+
+## 📝 License
+
+Copyright © 2025 Nhero Milano. All rights reserved.
