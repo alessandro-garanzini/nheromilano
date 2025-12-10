@@ -3,11 +3,7 @@
 import { usePathname, useRouter } from 'next/navigation';
 import { locales, type Locale } from '@/next-intl.config';
 
-interface LanguageSwitcherProps {
-  isScrolled?: boolean;
-}
-
-export default function LanguageSwitcher({ isScrolled = true }: LanguageSwitcherProps) {
+export default function LanguageSwitcher() {
   const pathname = usePathname();
   const router = useRouter();
 
@@ -33,15 +29,13 @@ export default function LanguageSwitcher({ isScrolled = true }: LanguageSwitcher
             className={`px-1.5 py-0.5 text-xs tracking-wider uppercase transition-colors duration-300 ${
               currentLocale === locale
                 ? 'text-nhero-gold'
-                : isScrolled 
-                  ? 'text-nhero-charcoal/60 hover:text-nhero-charcoal'
-                  : 'text-white/60 hover:text-white'
+                : 'text-white/60 hover:text-white'
             }`}
           >
             {locale}
           </button>
           {index < locales.length - 1 && (
-            <span className={`text-xs ${isScrolled ? 'text-nhero-charcoal/30' : 'text-white/30'}`}>/</span>
+            <span className="text-xs text-white/60">/</span>
           )}
         </span>
       ))}

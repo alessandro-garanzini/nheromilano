@@ -55,7 +55,7 @@ export default function Navigation() {
       blur="4px"
     >
       <header className="sticky top-0 left-0 right-0 z-40 bg-nhero-green transition-all duration-500">
-        <nav className="container py-6">
+        <nav className="container py-3">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link 
@@ -105,7 +105,7 @@ export default function Navigation() {
               offset={10}
               blur="3px"
             >
-              <LanguageSwitcher isScrolled={false} />
+              <LanguageSwitcher />
             </BlurFade>
           </div>
 
@@ -163,7 +163,7 @@ export default function Navigation() {
                   offset={15}
                   blur="4px"
                 >
-                  <LanguageSwitcher isScrolled={false} />
+                  <LanguageSwitcher />
                 </BlurFade>
               </div>
             </motion.div>

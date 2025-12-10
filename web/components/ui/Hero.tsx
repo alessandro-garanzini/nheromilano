@@ -58,7 +58,6 @@ export default function Hero({
       <div className={`relative z-10 container flex flex-col ${alignClasses[align]} py-24`}>
         {/* White Logo */}
         <motion.div
-          className="mb-8"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
@@ -66,34 +65,13 @@ export default function Hero({
           <Image
             src="/nhero_white_logo.png"
             alt="Nhero Milano"
-            width={300}
-            height={120}
-            className="w-auto h-auto max-w-[250px] md:max-w-[350px] lg:max-w-[400px]"
+            width={220}
+            height={48}
+            className="w-[960px] h-auto"
             priority
             unoptimized
           />
         </motion.div>
-
-        {subtitle && (
-          <motion.p
-            className="text-lg md:text-xl text-white/90 mb-10 max-w-2xl font-light"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          >
-            {subtitle}
-          </motion.p>
-        )}
-
-        {children && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-          >
-            {children}
-          </motion.div>
-        )}
       </div>
     </section>
   );

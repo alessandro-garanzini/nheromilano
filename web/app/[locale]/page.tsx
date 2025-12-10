@@ -35,16 +35,8 @@ export default async function HomePage({
         subtitle={homePage?.hero_subtitle || "Bar · Ristorante · Bakery · Pizzeria"}
         image={heroImage}
         height="full"
-      >
-        <div className="flex gap-4 flex-wrap justify-center">
-          <Button href="#esperienze" variant="primary" size="large">
-            Scopri
-          </Button>
-          <Button href={`/${locale}/menu`} variant="outline" size="large">
-            Menu
-          </Button>
-        </div>
-      </Hero>
+      />
+
 
       {/* Avvisi Section */}
       {avvisi.length > 0 && (
