@@ -12,7 +12,7 @@
   --background: var(--nhero-green);
   --foreground: var(--nhero-charcoal);
   --muted: #6B7066;
-  --border-color: var(--nhero-gold);
+  --border-color: var(--nhero-cream);
   
   /* Frame Border */
   --frame-border: 12px;
@@ -148,6 +148,14 @@ a {
 
 .text-nhero-charcoal {
   color: var(--nhero-charcoal);
+}
+
+.text-nhero-cream {
+  color: var(--nhero-cream);
+}
+
+.text-nhero-vanilla {
+  color: var(--nhero-vanilla);
 }
 
 .bg-nhero-green {
