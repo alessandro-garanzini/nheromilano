@@ -13,33 +13,44 @@ interface FloatingDockProps {
   phone?: string;
 }
 
-export default function FloatingDock({ 
-  reservationUrl, 
-  deliveryUrl, 
-  mapsUrl, 
-  phone 
+export default function FloatingDock({
+  reservationUrl,
+  deliveryUrl,
+  mapsUrl,
+  phone
 }: FloatingDockProps) {
   const [isVisible, setIsVisible] = useState(true);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const t = useTranslations('dock');
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
+
       // Hide on scroll down, show on scroll up
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
         setIsVisible(false);
       } else if (currentScrollY < lastScrollY) {
         setIsVisible(true);
       }
-      
+
       setLastScrollY(currentScrollY);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
+
+  // Listen for mobile menu toggle event
+  useEffect(() => {
+    const handleMobileMenuToggle = (event: CustomEvent<{ isOpen: boolean }>) => {
+      setIsMobileMenuOpen(event.detail.isOpen);
+    };
+
+    window.addEventListener('mobileMenuToggle', handleMobileMenuToggle as EventListener);
+    return () => window.removeEventListener('mobileMenuToggle', handleMobileMenuToggle as EventListener);
+  }, []);
 
   const actions = [
     { 
@@ -74,11 +85,14 @@ export default function FloatingDock({
     },
   ];
 
+  // Hide dock when mobile menu is open or when scrolling down
+  const shouldShow = isVisible && !isMobileMenuOpen;
+
   return (
     <motion.div
       className="fixed bottom-0 left-0 right-0 z-50 bg-nhero-cream"
       initial={{ y: 100 }}
-      animate={{ y: isVisible ? 0 : 100 }}
+      animate={{ y: shouldShow ? 0 : 100 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
     >
       <div className="flex items-center justify-center gap-0 px-[var(--frame-border)] h-16">

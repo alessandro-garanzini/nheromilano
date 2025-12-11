@@ -24,6 +24,22 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Prevent body scroll when mobile menu is open and notify other components
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    // Dispatch custom event for other components (like FloatingDock)
+    window.dispatchEvent(new CustomEvent('mobileMenuToggle', { detail: { isOpen: isMobileMenuOpen } }));
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
+
   const navItems = [
     { href: '', label: t('home') },
     { href: '/esperienze', label: t('experiences') },
@@ -47,6 +63,7 @@ export default function Navigation() {
   };
 
   return (
+    <>
     <header className="fixed top-3 left-3 right-3 z-40">
       <BlurFade
         direction="down"
@@ -110,69 +127,117 @@ export default function Navigation() {
             </BlurFade>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 text-white transition-colors duration-300"
-            aria-label="Toggle menu"
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-              {isMobileMenuOpen ? (
-                <path d="M18 6L6 18M6 6l12 12" />
-              ) : (
-                <path d="M4 8h16M4 16h16" />
-              )}
-            </svg>
-          </button>
+          {/* Mobile Menu Button - placeholder for layout */}
+          <div className="lg:hidden w-8 h-8" />
         </div>
-
-        {/* Mobile Navigation */}
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <motion.div
-              className="lg:hidden overflow-hidden"
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <div className="pt-6 pb-4 flex flex-col gap-4">
-                {navItems.map((item, index) => (
-                  <BlurFade
-                    key={item.href}
-                    delay={index * 0.05}
-                    duration={0.3}
-                    direction="left"
-                    offset={15}
-                    blur="4px"
-                  >
-                    <Link
-                      href={getLocalizedPath(item.href)}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className={`block text-lg font-semibold transition-colors duration-300 ${
-                        isActive(item.href) ? 'text-nhero-gold' : 'text-white'
-                      }`}
-                    >
-                      {item.label}
-                    </Link>
-                  </BlurFade>
-                ))}
-                <BlurFade
-                  delay={navItems.length * 0.05}
-                  duration={0.3}
-                  direction="left"
-                  offset={15}
-                  blur="4px"
-                >
-                  <LanguageSwitcher />
-                </BlurFade>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
         </nav>
         </div>
       </BlurFade>
     </header>
+
+      {/* Mobile Menu Button - Fixed position to stay on top of fullscreen menu */}
+      <button
+        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        className="lg:hidden fixed top-4 right-4 w-8 h-8 flex items-center justify-center text-nhero-cream z-[60]"
+        aria-label="Toggle menu"
+        style={{ right: '1rem' }}
+      >
+        <div className="relative w-6 h-5 flex flex-col justify-center items-center">
+          <motion.span
+            className="absolute w-6 h-[2px] bg-current rounded-full"
+            animate={{
+              rotate: isMobileMenuOpen ? 45 : 0,
+              y: isMobileMenuOpen ? 0 : -6,
+            }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          />
+          <motion.span
+            className="absolute w-6 h-[2px] bg-current rounded-full"
+            animate={{
+              opacity: isMobileMenuOpen ? 0 : 1,
+              scaleX: isMobileMenuOpen ? 0 : 1,
+            }}
+            transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          />
+          <motion.span
+            className="absolute w-6 h-[2px] bg-current rounded-full"
+            animate={{
+              rotate: isMobileMenuOpen ? -45 : 0,
+              y: isMobileMenuOpen ? 0 : 6,
+            }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          />
+        </div>
+      </button>
+
+      {/* Fullscreen Mobile Navigation - Outside header for proper z-index */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            className="lg:hidden fixed inset-0 w-screen h-screen bg-nhero-green z-50 flex flex-col items-center justify-center overflow-hidden"
+            initial={{ clipPath: 'circle(0% at calc(100% - 2rem) 1.5rem)' }}
+            animate={{ clipPath: 'circle(150% at calc(100% - 2rem) 1.5rem)' }}
+            exit={{ clipPath: 'circle(0% at calc(100% - 2rem) 1.5rem)' }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {/* Centered navigation */}
+            <nav className="flex flex-col items-center justify-center gap-6">
+              {navItems.map((item, index) => (
+                <motion.div
+                  key={item.href}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 20 }}
+                  transition={{
+                    duration: 0.4,
+                    delay: 0.15 + index * 0.08,
+                    ease: [0.22, 1, 0.36, 1]
+                  }}
+                >
+                  <Link
+                    href={getLocalizedPath(item.href)}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`block text-3xl font-semibold uppercase tracking-wider transition-colors duration-300 ${
+                      isActive(item.href) ? 'text-nhero-gold' : 'text-nhero-cream hover:text-white'
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                </motion.div>
+              ))}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                transition={{
+                  duration: 0.4,
+                  delay: 0.15 + navItems.length * 0.08,
+                  ease: [0.22, 1, 0.36, 1]
+                }}
+                className="mt-4"
+              >
+                <LanguageSwitcher />
+              </motion.div>
+            </nav>
+
+            {/* Logo centered below nav items */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.15 + (navItems.length + 1) * 0.08, ease: [0.22, 1, 0.36, 1] }}
+              className="mt-12"
+            >
+              <Image
+                src="/nhero_white_logo.png"
+                alt="Nhero Milano"
+                width={140}
+                height={42}
+                className="h-9 w-auto opacity-80"
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
