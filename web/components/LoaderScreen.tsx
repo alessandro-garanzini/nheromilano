@@ -6,34 +6,46 @@ import Image from 'next/image';
 /**
  * Loader Screen Component
  * Shows a loading screen with the Nhero logo and a circular loader animation.
- * When loading completes, the cream background transforms into green via a circular reveal,
- * then smoothly fades out to reveal the website.
+ * When loading completes, a green ring expands from center outward, revealing the website.
  */
 export default function LoaderScreen() {
   const [isLoading, setIsLoading] = useState(true);
   const [isRevealing, setIsRevealing] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
+  const [ringPhase, setRingPhase] = useState(0); // 0: waiting, 1: green expanding, 2: hole expanding
 
   useEffect(() => {
     // Loading phase
     const loadingTimer = setTimeout(() => {
       setIsLoading(false);
       setIsRevealing(true);
+      setRingPhase(1);
     }, 2000);
 
     return () => clearTimeout(loadingTimer);
   }, []);
 
   useEffect(() => {
-    if (isRevealing) {
-      // After circular reveal completes, remove loader
+    if (ringPhase === 1) {
+      // Start expanding the inner hole after green has started expanding
+      const holeTimer = setTimeout(() => {
+        setRingPhase(2);
+      }, 150);
+
+      return () => clearTimeout(holeTimer);
+    }
+  }, [ringPhase]);
+
+  useEffect(() => {
+    if (ringPhase === 2) {
+      // After ring animation completes, remove loader
       const completeTimer = setTimeout(() => {
         setIsComplete(true);
-      }, 800);
+      }, 1000);
 
       return () => clearTimeout(completeTimer);
     }
-  }, [isRevealing]);
+  }, [ringPhase]);
 
   if (isComplete) {
     return null;
@@ -66,45 +78,31 @@ export default function LoaderScreen() {
         `}
       </style>
 
+      {/* Cream background with logo - shrinks from center */}
       <div
-        className="loader-screen"
         style={{
           position: 'fixed',
           inset: 'var(--frame-border)',
           zIndex: 9998,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
           backgroundColor: 'var(--nhero-cream)',
-          overflow: 'hidden',
+          clipPath: isRevealing
+            ? 'circle(0% at 50% 50%)'
+            : 'circle(150% at 50% 50%)',
+          transition: 'clip-path 0.8s cubic-bezier(0.22, 1, 0.36, 1)',
         }}
       >
-        {/* Green circular reveal overlay */}
+        {/* Content container */}
         <div
           style={{
             position: 'absolute',
             inset: 0,
-            backgroundColor: 'var(--nhero-green)',
-            clipPath: isRevealing
-              ? 'circle(150% at 50% 50%)'
-              : 'circle(0% at 50% 50%)',
-            transition: 'clip-path 0.8s cubic-bezier(0.22, 1, 0.36, 1)',
-            zIndex: 1,
-          }}
-        />
-
-        {/* Content container */}
-        <div
-          style={{
-            position: 'relative',
-            zIndex: 2,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            justifyContent: 'center',
             gap: '2rem',
             opacity: isRevealing ? 0 : 1,
-            transition: 'opacity 0.3s ease',
+            transition: 'opacity 0.2s ease',
           }}
         >
           {/* Logo */}
@@ -147,6 +145,26 @@ export default function LoaderScreen() {
           )}
         </div>
       </div>
+
+      {/* Green ring layer - uses mask to create ring effect */}
+      <div
+        style={{
+          position: 'fixed',
+          inset: 'var(--frame-border)',
+          zIndex: 9997,
+          backgroundColor: 'var(--nhero-green)',
+          clipPath: ringPhase >= 1
+            ? 'circle(150% at 50% 50%)'
+            : 'circle(0% at 50% 50%)',
+          WebkitMaskImage: ringPhase >= 2
+            ? 'radial-gradient(circle at 50% 50%, transparent 150%, black 150%)'
+            : 'radial-gradient(circle at 50% 50%, transparent 0%, black 0%)',
+          maskImage: ringPhase >= 2
+            ? 'radial-gradient(circle at 50% 50%, transparent 150%, black 150%)'
+            : 'radial-gradient(circle at 50% 50%, transparent 0%, black 0%)',
+          transition: 'clip-path 0.8s cubic-bezier(0.22, 1, 0.36, 1), mask-image 0.8s cubic-bezier(0.22, 1, 0.36, 1), -webkit-mask-image 0.8s cubic-bezier(0.22, 1, 0.36, 1)',
+        }}
+      />
     </>
   );
 }
