@@ -89,18 +89,39 @@ export default function FloatingDock({
             : {};
           
           return (
-            <ActionWrapper
+            <motion.div
               key={action.label}
-              href={action.href}
-              {...linkProps}
-              className="flex flex-col items-center justify-center gap-0.5 px-6 h-full transition-colors duration-300 hover:bg-nhero-charcoal group flex-1"
-              style={{ color: 'var(--nhero-green)' }}
+              className="flex-1"
+              whileHover="hover"
+              initial="initial"
             >
-              <action.icon size={18} strokeWidth={2} />
-              <span className="text-[9px] font-semibold uppercase tracking-wider">
-                {action.label}
-              </span>
-            </ActionWrapper>
+              <ActionWrapper
+                href={action.href}
+                {...linkProps}
+                className="flex flex-col items-center justify-center gap-0.5 px-6 h-full group flex-1"
+                style={{ color: 'var(--nhero-green)' }}
+              >
+                <motion.div
+                  variants={{
+                    initial: { scale: 1 },
+                    hover: { scale: 1.8 }
+                  }}
+                  transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <action.icon size={18} strokeWidth={2} />
+                </motion.div>
+                <motion.span
+                  className="text-[9px] font-semibold uppercase tracking-wider"
+                  variants={{
+                    initial: { opacity: 1, y: 0 },
+                    hover: { opacity: 0, y: 5 }
+                  }}
+                  transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  {action.label}
+                </motion.span>
+              </ActionWrapper>
+            </motion.div>
           );
         })}
       </div>
