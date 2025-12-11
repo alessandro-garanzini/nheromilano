@@ -12,16 +12,6 @@ export default function directusImageLoader({
   width: number;
   quality?: number;
 }) {
-  // For local images (from /public folder), return as-is
-  if (src.startsWith('/')) {
-    return src;
-  }
-
-  // If the src already has query parameters (from getOptimizedImageUrl),
-  // return it as-is since Directus handles the optimization
-  if (src.includes('?')) {
-    return src;
-  }
 
   // Otherwise, add width and quality parameters for Directus images
   const params = new URLSearchParams();
