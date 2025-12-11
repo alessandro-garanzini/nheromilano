@@ -84,7 +84,7 @@ export default function LoaderScreen() {
           position: 'fixed',
           inset: 'var(--frame-border)',
           zIndex: 9998,
-          backgroundColor: 'var(--nhero-cream)',
+          backgroundColor: 'var(--nhero-green)',
           clipPath: isRevealing
             ? 'circle(0% at 50% 50%)'
             : 'circle(150% at 50% 50%)',
@@ -107,7 +107,7 @@ export default function LoaderScreen() {
         >
           {/* Logo */}
           <Image
-            src="/nhero_black_logo.png"
+            src="/nhero_white_logo.png"
             alt="Nhero Milano"
             width={180}
             height={60}
@@ -133,7 +133,7 @@ export default function LoaderScreen() {
                   cy="20"
                   r="16"
                   fill="none"
-                  stroke="var(--nhero-green)"
+                  stroke="var(--nhero-cream)"
                   strokeWidth="2"
                   strokeLinecap="round"
                   style={{
