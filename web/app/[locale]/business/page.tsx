@@ -6,6 +6,7 @@ import Section from '@/components/ui/Section';
 import Card from '@/components/ui/Card';
 import BusinessQuoteForm from '@/components/forms/BusinessQuoteForm';
 import { Building2, Users, Utensils, CalendarDays } from 'lucide-react';
+import type { BusinessService } from '@/types/directus';
 
 export const revalidate = 60;
 
@@ -47,14 +48,9 @@ export default async function BusinessPage({
 
           <div className="grid gap-8 md:grid-cols-2">
             {services.map((service, index) => {
-              const imageUrl = service.image
-                ? getOptimizedImageUrl(
-                    typeof service.image === 'string' 
-                      ? service.image 
-                      : service.image.id,
-                    600
-                  )
-                : null;
+              const image = service.image;
+              const imageId = image && typeof image === 'object' ? image.id : (image as string | undefined);
+              const imageUrl = imageId ? getOptimizedImageUrl(imageId, 600) : null;
 
               return (
                 <div 

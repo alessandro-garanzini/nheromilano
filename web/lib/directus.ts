@@ -1,5 +1,5 @@
 import { createDirectus, rest, staticToken, readSingleton, readItems, readItem } from '@directus/sdk';
-import type { DirectusSchema, Globals } from '@/types/directus';
+import type { DirectusSchema, Globals, Experience, MenuItem, MenuCategory, Event, BusinessService, Page, Avviso, FAQ } from '@/types/directus';
 
 /**
  * Directus Client Configuration
@@ -75,33 +75,33 @@ export async function getGlobals(): Promise<Globals | null> {
   }
 }
 
-export async function getExperiences() {
+export async function getExperiences(): Promise<Experience[]> {
   try {
     return await directus.request(
       readItems('experiences', {
         filter: { status: { _eq: 'published' } },
         sort: ['sort'],
-        fields: ['*', 'hero_image.*', 'gallery.*']
+        fields: ['*', { hero_image: ['*'] }, { gallery: ['*'] }] as any
       })
-    );
+    ) as unknown as Experience[];
   } catch (error) {
     console.error('Error fetching experiences:', error);
     return [];
   }
 }
 
-export async function getExperienceBySlug(slug: string) {
+export async function getExperienceBySlug(slug: string): Promise<Experience | null> {
   try {
     const experiences = await directus.request(
       readItems('experiences', {
-        filter: { 
+        filter: {
           slug: { _eq: slug },
           status: { _eq: 'published' }
         },
         limit: 1,
-        fields: ['*', 'hero_image.*', 'gallery.*', 'menu_categories.id', 'menu_categories.name', 'menu_categories.slug']
+        fields: ['*', { hero_image: ['*'] }, { gallery: ['*'] }, { menu_categories: ['id', 'name', 'slug'] }] as any
       })
-    );
+    ) as unknown as Experience[];
     return experiences[0] || null;
   } catch (error) {
     console.error('Error fetching experience:', error);
@@ -109,78 +109,78 @@ export async function getExperienceBySlug(slug: string) {
   }
 }
 
-export async function getMenuItems(categoryId?: string) {
+export async function getMenuItems(categoryId?: string): Promise<MenuItem[]> {
   try {
     const filter: any = { status: { _eq: 'published' } };
     if (categoryId) {
       filter.category = { _eq: categoryId };
     }
-    
+
     return await directus.request(
       readItems('menu_items', {
         filter,
         sort: ['sort', 'name'],
-        fields: ['*', 'image.*', 'category.name', 'category.slug']
+        fields: ['*', { image: ['*'] }, { category: ['name', 'slug'] }] as any
       })
-    );
+    ) as unknown as MenuItem[];
   } catch (error) {
     console.error('Error fetching menu items:', error);
     return [];
   }
 }
 
-export async function getMenuCategories(experienceId?: string) {
+export async function getMenuCategories(experienceId?: string): Promise<MenuCategory[]> {
   try {
     const filter: any = { status: { _eq: 'published' } };
     if (experienceId) {
       filter.experience = { _eq: experienceId };
     }
-    
+
     return await directus.request(
       readItems('menu_categories', {
         filter,
         sort: ['sort', 'name'],
-        fields: ['*', 'experience.title', 'experience.slug']
+        fields: ['*', { experience: ['title', 'slug'] }] as any
       })
-    );
+    ) as unknown as MenuCategory[];
   } catch (error) {
     console.error('Error fetching menu categories:', error);
     return [];
   }
 }
 
-export async function getEvents(includePast = false) {
+export async function getEvents(includePast = false): Promise<Event[]> {
   try {
     const filter: any = { status: { _eq: 'published' } };
     if (!includePast) {
       filter.is_past = { _neq: true };
     }
-    
+
     return await directus.request(
       readItems('events', {
         filter,
         sort: ['-date_event'],
-        fields: ['*', 'cover_image.*', 'gallery.*']
+        fields: ['*', { cover_image: ['*'] }, { gallery: ['*'] }] as any
       })
-    );
+    ) as unknown as Event[];
   } catch (error) {
     console.error('Error fetching events:', error);
     return [];
   }
 }
 
-export async function getEventBySlug(slug: string) {
+export async function getEventBySlug(slug: string): Promise<Event | null> {
   try {
     const events = await directus.request(
       readItems('events', {
-        filter: { 
+        filter: {
           slug: { _eq: slug },
           status: { _eq: 'published' }
         },
         limit: 1,
-        fields: ['*', 'cover_image.*', 'gallery.*']
+        fields: ['*', { cover_image: ['*'] }, { gallery: ['*'] }] as any
       })
-    );
+    ) as unknown as Event[];
     return events[0] || null;
   } catch (error) {
     console.error('Error fetching event:', error);
@@ -188,33 +188,33 @@ export async function getEventBySlug(slug: string) {
   }
 }
 
-export async function getBusinessServices() {
+export async function getBusinessServices(): Promise<BusinessService[]> {
   try {
     return await directus.request(
       readItems('business_services', {
         filter: { status: { _eq: 'published' } },
         sort: ['sort'],
-        fields: ['*', 'image.*']
+        fields: ['*', { image: ['*'] }] as any
       })
-    );
+    ) as unknown as BusinessService[];
   } catch (error) {
     console.error('Error fetching business services:', error);
     return [];
   }
 }
 
-export async function getPageBySlug(slug: string) {
+export async function getPageBySlug(slug: string): Promise<Page | null> {
   try {
     const pages = await directus.request(
       readItems('pages', {
-        filter: { 
+        filter: {
           slug: { _eq: slug },
           status: { _eq: 'published' }
         },
         limit: 1,
-        fields: ['*', 'hero_image.*']
+        fields: ['*', { hero_image: ['*'] }] as any
       })
-    );
+    ) as unknown as Page[];
     return pages[0] || null;
   } catch (error) {
     console.error('Error fetching page:', error);
@@ -222,35 +222,35 @@ export async function getPageBySlug(slug: string) {
   }
 }
 
-export async function getActiveAvvisi() {
+export async function getActiveAvvisi(): Promise<Avviso[]> {
   try {
     return await directus.request(
       readItems('avvisi', {
         filter: { status: { _eq: 'published' } },
         sort: ['sort'],
-        fields: ['*', 'foto.*']
+        fields: ['*', { foto: ['*'] }] as any
       })
-    );
+    ) as unknown as Avviso[];
   } catch (error) {
     console.error('Error fetching avvisi:', error);
     return [];
   }
 }
 
-export async function getFAQs(category?: string) {
+export async function getFAQs(category?: string): Promise<FAQ[]> {
   try {
     const filter: any = { status: { _eq: 'published' } };
     if (category) {
       filter.category = { _eq: category };
     }
-    
+
     return await directus.request(
       readItems('faqs', {
         filter,
         sort: ['sort'],
         fields: ['*']
       })
-    );
+    ) as unknown as FAQ[];
   } catch (error) {
     console.error('Error fetching FAQs:', error);
     return [];

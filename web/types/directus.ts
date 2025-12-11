@@ -52,8 +52,8 @@ export interface Experience {
   hero_image?: string | DirectusFile;
   seo_title?: string;
   seo_description?: string;
-  gallery?: string[] | DirectusFile[];
-  menu_categories?: MenuCategory[];
+  gallery?: string[] | DirectusFile[] | null;
+  menu_categories?: MenuCategory[] | null;
 }
 
 export interface MenuCategory {
@@ -64,7 +64,8 @@ export interface MenuCategory {
   slug?: string;
   description?: string;
   experience?: string | Experience;
-  items?: MenuItem[];
+  items?: MenuItem[] | null;
+  items_count?: number;
 }
 
 export interface MenuItem {
@@ -97,7 +98,7 @@ export interface Event {
   cover_image?: string | DirectusFile;
   is_past?: boolean;
   external_link?: string;
-  gallery?: string[] | DirectusFile[];
+  gallery?: string[] | DirectusFile[] | null;
 }
 
 export interface BusinessService {
@@ -172,7 +173,7 @@ export interface BusinessQuoteSubmission {
 }
 
 export interface DirectusSchema {
-  globals: Globals[];
+  globals: Globals;
   experiences: Experience[];
   menu_categories: MenuCategory[];
   menu_items: MenuItem[];
