@@ -26,11 +26,12 @@ export default function LanguageSwitcher() {
         <span key={locale} className="flex items-center">
           <button
             onClick={() => switchLanguage(locale)}
-            className={`px-1.5 py-0.5 text-xs tracking-wider uppercase transition-colors duration-300 ${
+            className={`px-1.5 py-0.5 text-xs tracking-wider uppercase transition-all duration-300 ${
               currentLocale === locale
                 ? 'text-nhero-gold'
-                : 'text-white/60 hover:text-white'
+                : 'hover:opacity-100'
             }`}
+            style={{ color: currentLocale === locale ? undefined : 'rgba(255, 255, 255, 0.6)' }}
           >
             {locale}
           </button>
