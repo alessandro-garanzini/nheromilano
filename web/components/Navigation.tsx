@@ -183,16 +183,13 @@ export default function Navigation() {
             {/* Centered navigation */}
             <nav className="flex flex-col items-center justify-center gap-6">
               {navItems.map((item, index) => (
-                <motion.div
+                <BlurFade
                   key={item.href}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 20 }}
-                  transition={{
-                    duration: 0.4,
-                    delay: 0.15 + index * 0.08,
-                    ease: [0.22, 1, 0.36, 1]
-                  }}
+                  delay={0.15 + index * 0.08}
+                  duration={0.4}
+                  direction="up"
+                  offset={30}
+                  blur="4px"
                 >
                   <Link
                     href={getLocalizedPath(item.href)}
@@ -203,24 +200,29 @@ export default function Navigation() {
                   >
                     {item.label}
                   </Link>
-                </motion.div>
+                </BlurFade>
               ))}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 20 }}
-                transition={{
-                  duration: 0.4,
-                  delay: 0.15 + navItems.length * 0.08,
-                  ease: [0.22, 1, 0.36, 1]
-                }}
-                className="mt-4"
+              <BlurFade
+                delay={0.15 + navItems.length * 0.08}
+                duration={0.4}
+                direction="up"
+                offset={30}
+                blur="4px"
               >
-                <LanguageSwitcher />
-              </motion.div>
+                <div className="mt-4">
+                  <LanguageSwitcher />
+                </div>
+              </BlurFade>
             </nav>
 
             {/* Logo centered below nav items */}
+            <BlurFade
+              delay={0.15 + (navItems.length + 1) * 0.08}
+              duration={0.4}
+              direction="up"
+              offset={30}
+              blur="4px"
+            >
               <Image
                 src="/nhero_white_logo.png"
                 alt="Nhero Milano"
@@ -228,6 +230,7 @@ export default function Navigation() {
                 height={42}
                 className="h-9 mt-10 "
               />
+            </BlurFade>
           </motion.div>
         )}
       </AnimatePresence>
