@@ -76,7 +76,7 @@ export default function FloatingDock({
 
   return (
     <motion.div
-      className="fixed bottom-0 left-0 right-0 z-50 bg-nhero-gold"
+      className="fixed bottom-0 left-0 right-0 z-50 bg-nhero-cream"
       initial={{ y: 100 }}
       animate={{ y: isVisible ? 0 : 100 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
@@ -94,7 +94,7 @@ export default function FloatingDock({
               href={action.href}
               {...linkProps}
               className="flex flex-col items-center justify-center gap-0.5 px-6 h-full transition-colors duration-300 hover:bg-nhero-charcoal group flex-1"
-              style={{ color: 'white' }}
+              style={{ color: 'var(--nhero-green)' }}
             >
               <action.icon size={18} strokeWidth={2} />
               <span className="text-[9px] font-semibold uppercase tracking-wider">
