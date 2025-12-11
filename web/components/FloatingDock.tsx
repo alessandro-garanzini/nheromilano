@@ -93,6 +93,7 @@ export default function FloatingDock({
               key={action.label}
               className="flex-1"
               whileHover="hover"
+              whileTap="hover"
               initial="initial"
             >
               <ActionWrapper
