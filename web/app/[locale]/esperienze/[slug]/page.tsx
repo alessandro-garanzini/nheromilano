@@ -110,7 +110,6 @@ export default async function ExperiencePage({
                       alt={`${experience.title} - Image ${index + 1}`}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-700"
-                      width={800}
                     />
                   </div>
                 ) : null;

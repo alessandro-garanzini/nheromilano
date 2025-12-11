@@ -47,14 +47,15 @@ export default function Navigation() {
   };
 
   return (
-    <BlurFade
-      direction="down"
-      duration={0.5}
-      delay={0}
-      offset={20}
-      blur="4px"
-    >
-      <header className="sticky top-0 left-0 right-0 z-40 bg-nhero-green transition-all duration-500">
+    <header className="fixed top-3 left-3 right-3 z-40">
+      <BlurFade
+        direction="down"
+        duration={0.5}
+        delay={0}
+        offset={20}
+        blur="4px"
+      >
+        <div className="bg-nhero-green transition-all duration-500">
         <nav className="container py-3">
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -85,12 +86,12 @@ export default function Navigation() {
               >
                 <Link
                   href={getLocalizedPath(item.href)}
-                  className="relative text-sm font-semibold tracking-wide uppercase transition-colors duration-300 text-nhero-gold hover:text-white"
+                  className="relative text-sm font-semibold tracking-wide uppercase transition-colors duration-300 text-nhero-cream hover:text-white"
                 >
                   {item.label}
                   {isActive(item.href) && (
                     <motion.span
-                      className="absolute -bottom-1 left-0 right-0 h-px bg-nhero-gold"
+                      className="absolute -bottom-1 left-0 right-0 h-px bg-nhero-cream"
                       layoutId="nav-underline"
                       transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                     />
@@ -170,7 +171,8 @@ export default function Navigation() {
           )}
         </AnimatePresence>
         </nav>
-      </header>
-    </BlurFade>
+        </div>
+      </BlurFade>
+    </header>
   );
 }

@@ -6,6 +6,8 @@ const withNextIntl = createNextIntlPlugin('./next-intl.config.ts');
 const nextConfig: NextConfig = {
   output: "standalone",
   images: {
+    loader: 'custom',
+    loaderFile: './lib/imageLoader.ts',
     remotePatterns: [
       {
         protocol: 'https',
