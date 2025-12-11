@@ -168,3 +168,239 @@ export interface Experience {
   // ...
 }
 ```
+
+## Directus Collections Schema
+
+### Content Organization
+
+Collections are organized in two folders:
+- **content**: Main website content (experiences, events, pages, avvisi, FAQs)
+- **menu**: Menu management (categories and items)
+
+### Core Collections
+
+#### **experiences** (Esperienze Nhero)
+Main content collection for the different restaurant experiences (Bakery, Ristorante, Pizzeria, Cocktail).
+
+**Key fields:**
+- `slug` (string, required): URL identifier (e.g., "bakery", "ristorante", "pizzeria", "cocktail")
+- `title` (string, required): Display name (e.g., "Bakery", "Ristorante")
+- `subtitle` (string): Brief tagline (e.g., "Pasticceria & Caffetteria")
+- `description` (rich text HTML): Full description of the experience
+- `icon` (icon): Visual icon identifier
+- `color` (color): Accent color for theming
+- `hero_image` (M2O → directus_files): Main hero image
+- `seo_title`, `seo_description`: SEO metadata
+- `gallery` (M2M → directus_files via experiences_gallery): Image gallery
+- `menu_categories` (O2M → menu_categories): Associated menu sections
+
+**Relations:**
+- Many-to-Many with `directus_files` through `experiences_gallery` junction
+- One-to-Many with `menu_categories` (reverse of category.experience)
+
+#### **menu_categories** (Categorie Menu)
+Menu sections like "Antipasti", "Pizze Classiche", "Dolci", "Cocktail".
+
+**Key fields:**
+- `name` (string, required): Category name
+- `slug` (string): URL-friendly identifier
+- `description` (text): Category description
+- `experience` (M2O → experiences): Parent experience
+- `items` (O2M → menu_items): Menu items in this category
+
+**Relations:**
+- Many-to-One with `experiences` (belongs to one experience)
+- One-to-Many with `menu_items` (has many dishes)
+
+#### **menu_items** (Piatti e Prodotti)
+Individual dishes, drinks, and products on the menu.
+
+**Key fields:**
+- `name` (string, required): Dish name
+- `description` (text): Ingredients and details
+- `price` (decimal): Price in euros
+- `category` (M2O → menu_categories, required): Parent category
+- `image` (M2O → directus_files): Dish photo
+- `is_vegetarian`, `is_vegan`, `is_gluten_free` (boolean): Dietary flags
+- `allergens` (json/tags): List of allergens
+- `is_featured` (boolean): Highlight as recommended
+
+**Relations:**
+- Many-to-One with `menu_categories` (belongs to one category)
+- Many-to-One with `directus_files` for image
+
+#### **events** (Eventi e Serate Speciali)
+Special events, themed nights, and restaurant happenings.
+
+**Key fields:**
+- `title` (string, required): Event name
+- `slug` (string): URL identifier
+- `date_event` (date, required): Event date
+- `time_start`, `time_end` (time): Event schedule
+- `description` (rich text HTML): Full event details
+- `cover_image` (M2O → directus_files): Event cover
+- `is_past` (boolean): Archive flag for past events
+- `external_link` (string): External booking link (e.g., Eventbrite)
+- `gallery` (M2M → directus_files via events_gallery): Event photos
+
+**Relations:**
+- Many-to-Many with `directus_files` through `events_gallery` junction
+
+#### **business_services** (Servizi Business)
+Business offerings like Fidelity Card, Catering, Corporate Events.
+
+**Key fields:**
+- `title` (string, required): Service name (e.g., "Fidelity Card Aziendale")
+- `description` (text): Service description
+- `icon` (icon): Service icon
+- `image` (M2O → directus_files): Representative image
+
+**Relations:**
+- Many-to-One with `directus_files` for image
+
+#### **pages** (Pagine Statiche)
+Static content pages like "Business", "About", "Contatti".
+
+**Key fields:**
+- `slug` (string, required): Page URL (e.g., "home", "business", "contatti")
+- `title` (string, required): Page title
+- `hero_title`, `hero_subtitle` (string): Hero section content
+- `hero_image` (M2O → directus_files): Hero background
+- `content` (rich text HTML): Main page content
+- `seo_title`, `seo_description`: SEO metadata
+
+**Relations:**
+- Many-to-One with `directus_files` for hero image
+
+#### **faqs** (Domande Frequenti)
+Frequently asked questions organized by category.
+
+**Key fields:**
+- `question` (string, required): The question
+- `answer` (rich text HTML, required): Detailed answer
+- `category` (select): FAQ category ("general", "reservations", "menu", "events", "business")
+
+**No relations**
+
+#### **avvisi** (Avvisi Homepage)
+Popup notifications/alerts shown on homepage.
+
+**Key fields:**
+- `titolo` (string, required): Alert title
+- `descrizione` (rich text HTML, required): Alert description (supports HTML)
+- `foto` (M2O → directus_files): Optional alert image
+- System fields: `user_created`, `date_created`, `user_updated`, `date_updated`
+
+**Relations:**
+- Many-to-One with `directus_files` for photo
+
+#### **globals** (Impostazioni Globali) - Singleton
+Site-wide settings like contact info, hours, social links.
+
+**Key fields:**
+- `site_name`, `tagline`: Brand identity
+- `address`, `phone`, `email`: Contact information
+- `google_maps_url`: Location link
+- `opening_hours` (JSON list): Schedule with day/hours pairs
+  ```typescript
+  [{
+    day: 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday',
+    hours: string  // e.g., "07:00 - 24:00"
+  }]
+  ```
+- `instagram`, `facebook`, `tiktok`: Social media URLs
+- `reservation_url`: Booking platform link (TheFork)
+- `delivery_url`: Delivery service link (Glovo, Deliveroo)
+
+**No relations** (singleton collection)
+
+### Form Submissions
+
+#### **contact_submissions** (Richieste Contatto)
+Contact form submissions from the website.
+
+**Key fields:**
+- `name`, `email` (string, required): Contact info
+- `phone` (string): Optional phone
+- `message` (text, required): User message
+- `status` (select): Submission status ("new", "read", "replied", "archived")
+- `date_created` (timestamp, readonly): Auto-tracked
+
+**No relations**
+
+#### **business_quote_submissions** (Richieste Preventivi Business)
+Business inquiry form submissions.
+
+**Key fields:**
+- `name`, `email` (string, required): Contact info
+- `company` (string, required): Business name
+- `phone` (string): Optional phone
+- `event_type` (select, required): Service type ("fidelity", "catering", "events", "meeting", "other")
+- `event_date` (date): Indicative date
+- `guests_number` (integer): Number of people
+- `notes` (text): Additional details
+- `status` (select): Quote status ("new", "contacted", "quoted", "confirmed", "rejected")
+- `date_created` (timestamp, readonly): Auto-tracked
+
+**No relations**
+
+### Junction Collections
+
+#### **experiences_gallery**
+Many-to-Many junction for experience image galleries.
+
+**Fields:**
+- `id`, `experiences_id`, `directus_files_id`, `sort`
+
+#### **events_gallery**
+Many-to-Many junction for event image galleries.
+
+**Fields:**
+- `id`, `events_id`, `directus_files_id`, `sort`
+
+### Standard Fields Pattern
+
+All content collections include:
+- `id` (UUID, primary key)
+- `status` ("published", "draft", "archived")
+- `sort` (integer) - Manual ordering
+- System timestamps: `date_created`, `date_updated` (where applicable)
+- System users: `user_created`, `user_updated` (for tracked collections)
+
+### Query Patterns
+
+**Fetching with relations:**
+```typescript
+// Experience with gallery and categories
+const experience = await directus.request(
+  readItem('experiences', slug, {
+    fields: ['*', 'hero_image.*', 'gallery.*', 'menu_categories.*']
+  })
+);
+
+// Menu category with items and parent experience
+const category = await directus.request(
+  readItem('menu_categories', id, {
+    fields: ['*', 'experience.*', 'items.*.image.*']
+  })
+);
+```
+
+**Filtering published content:**
+```typescript
+// Always filter by status for public-facing queries
+const items = await directus.request(
+  readItems('experiences', {
+    filter: { status: { _eq: 'published' } },
+    sort: ['sort']
+  })
+);
+```
+
+**Globals singleton access:**
+```typescript
+// Globals is a singleton - fetch first item
+const globals = await directus.request(
+  readItems('globals', { limit: 1 })
+);
+```
