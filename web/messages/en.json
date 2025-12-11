@@ -88,6 +88,11 @@
     "previous": "Previous",
     "showAll": "Show all"
   },
+  "notFound": {
+    "title": "This page got lost in the kitchen",
+    "subtitle": "Don't worry, even the best chefs lose a recipe from time to time",
+    "backHome": "Back Home"
+  },
   "footer": {
     "followUs": "Follow Us",
     "legal": "Legal Information",

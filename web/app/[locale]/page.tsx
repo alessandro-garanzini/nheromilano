@@ -5,6 +5,7 @@ import Hero from '@/components/ui/Hero';
 import Section from '@/components/ui/Section';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
+import DirectusImage from '@/components/DirectusImage';
 import Link from 'next/link';
 
 export const revalidate = 60;
@@ -40,7 +41,7 @@ export default async function HomePage({
 
       {/* Avvisi Section */}
       {avvisi.length > 0 && (
-        <Section background="cream" padding="medium">
+        <Section background="transparent" padding="medium">
           <div className="container">
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {avvisi.map((avviso) => {
@@ -71,44 +72,52 @@ export default async function HomePage({
       )}
 
       {/* Experiences Section */}
-      <Section id="esperienze" background="vanilla">
+      <Section id="esperienze" background="transparent">
         <div className="container">
           <div className="max-w-2xl mb-16">
             <p className="text-nhero-gold text-sm uppercase tracking-wider mb-4">
               Le nostre esperienze
             </p>
-            <h2 className="text-4xl md:text-5xl font-medium text-nhero-charcoal mb-6">
+            <h2 className="text-4xl md:text-5xl font-medium text-white mb-6">
               {t('title')}
             </h2>
-            <p className="text-muted text-lg">
+            <p className="text-white/80 text-lg">
               {t('subtitle')}
             </p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {experiences.map((experience) => {
-              const imageUrl = experience.hero_image
-                ? getOptimizedImageUrl(
-                    typeof experience.hero_image === 'string' 
-                      ? experience.hero_image 
-                      : experience.hero_image.id,
-                    800
-                  )
+              const imageId = typeof experience.hero_image === 'string' 
+                ? experience.hero_image 
+                : experience.hero_image?.id;
+              const imageUrl = imageId 
+                ? `${process.env.NEXT_PUBLIC_DIRECTUS_URL}/assets/${imageId}?width=800&quality=75&format=auto&fit=cover`
                 : null;
-
+              
               return (
                 <Link
                   key={experience.id}
                   href={`/${locale}/esperienze/${experience.slug}`}
-                  className="group"
+                  className="group block"
                 >
-                  <Card
-                    title={experience.title}
-                    description={experience.subtitle}
-                    image={imageUrl}
-                    variant="overlay"
-                    imageHeight="aspect-[3/4]"
-                  />
+                  <div 
+                    className="relative aspect-[3/4] overflow-hidden bg-nhero-charcoal bg-cover bg-center transition-transform duration-700 group-hover:scale-[1.02]"
+                    style={imageUrl ? { backgroundImage: `url(${imageUrl})` } : {}}
+                  >
+                    <div className="absolute inset-0 image-overlay flex items-end p-6">
+                      <div>
+                        <h3 className="text-xl md:text-2xl font-medium text-white">
+                          {experience.title}
+                        </h3>
+                        {experience.subtitle && (
+                          <p className="text-white/70 mt-2 text-sm">
+                            {experience.subtitle}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
                 </Link>
               );
             })}
@@ -116,27 +125,6 @@ export default async function HomePage({
         </div>
       </Section>
 
-      {/* CTA Section */}
-      <Section background="charcoal" padding="large">
-        <div className="container">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium mb-6">
-              Prenota la tua esperienza
-            </h2>
-            <p className="text-white/70 text-lg mb-10 max-w-xl mx-auto">
-              Vieni a scoprire il meglio della cucina italiana in un ambiente elegante e accogliente
-            </p>
-            <div className="flex gap-4 flex-wrap justify-center">
-              <Button href={`/${locale}/business`} variant="primary" size="large">
-                Business
-              </Button>
-              <Button href={`/${locale}/contatti`} variant="outline" size="large">
-                Contattaci
-              </Button>
-            </div>
-          </div>
-        </div>
-      </Section>
     </>
   );
 }

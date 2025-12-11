@@ -119,25 +119,6 @@ export default async function ExperiencePage({
         </Section>
       )}
 
-      {/* CTA */}
-      <Section background="charcoal" padding="large">
-        <div className="container text-center">
-          <span className="text-sm uppercase tracking-[0.2em] text-nhero-gold font-medium">
-            Visita
-          </span>
-          <h2 className="text-3xl font-medium mt-3 text-white tracking-tight">
-            Prenota la tua esperienza
-          </h2>
-          <div className="flex gap-4 flex-wrap justify-center mt-8">
-            <Button href={`/${locale}/menu`} variant="primary" size="large">
-              Vedi il Menu
-            </Button>
-            <Button href={`/${locale}/contatti`} variant="outline" size="large">
-              Contattaci
-            </Button>
-          </div>
-        </div>
-      </Section>
     </>
   );
 }

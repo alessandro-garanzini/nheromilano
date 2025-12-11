@@ -88,6 +88,11 @@
     "previous": "Precedente",
     "showAll": "Mostra tutto"
   },
+  "notFound": {
+    "title": "Ti sei perso?",
+    "subtitle": "Non preoccuparti, anche ai migliori chef capita di perdere una ricetta ogni tanto",
+    "backHome": "Torna in home"
+  },
   "footer": {
     "followUs": "Seguici",
     "legal": "Informazioni Legali",

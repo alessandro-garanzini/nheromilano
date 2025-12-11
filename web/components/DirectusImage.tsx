@@ -1,7 +1,6 @@
 'use client';
 
 import Image, { ImageProps } from 'next/image';
-import { getOptimizedImageUrl } from '@/lib/directus';
 import type { DirectusFile } from '@/types/directus';
 
 interface DirectusImageProps extends Omit<ImageProps, 'src'> {
@@ -23,13 +22,16 @@ export default function DirectusImage({
   alt,
   ...props
 }: DirectusImageProps) {
-  // Handle different src types
+  // Handle different src types - extract file ID and build base URL
   let imageUrl: string | null = null;
+  const baseUrl = process.env.NEXT_PUBLIC_DIRECTUS_URL;
   
   if (typeof src === 'string') {
-    imageUrl = getOptimizedImageUrl(src, width);
+    // src is already a file ID
+    imageUrl = `${baseUrl}/assets/${src}`;
   } else if (src && typeof src === 'object' && 'id' in src) {
-    imageUrl = getOptimizedImageUrl(src.id, width);
+    // src is a DirectusFile object
+    imageUrl = `${baseUrl}/assets/${src.id}`;
   }
 
   // Fallback if no valid image URL
