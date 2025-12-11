@@ -4,6 +4,7 @@ import Hero from '@/components/ui/Hero';
 import Section from '@/components/ui/Section';
 import ContactForm from '@/components/forms/ContactForm';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import type { OpeningHour } from '@/types/directus';
 
 export const revalidate = 60;
 
@@ -21,6 +22,8 @@ export default async function ContattiPage() {
     saturday: tDays('saturday'),
     sunday: tDays('sunday'),
   };
+
+  const openingHours: OpeningHour[] = globals?.opening_hours || [];
 
   return (
     <>
@@ -100,7 +103,7 @@ export default async function ContattiPage() {
                     </div>
                   )}
 
-                  {globals?.opening_hours && globals.opening_hours.length > 0 && (
+                  {openingHours.length > 0 && (
                     <div className="flex gap-4">
                       <div className="w-10 h-10 rounded-full bg-nhero-cream flex items-center justify-center flex-shrink-0">
                         <Clock className="text-nhero-gold" size={18} />
@@ -108,7 +111,7 @@ export default async function ContattiPage() {
                       <div className="flex-1">
                         <h3 className="font-medium mb-3 text-nhero-charcoal">{t('hours')}</h3>
                         <div className="space-y-2">
-                          {globals.opening_hours.map((hour, index) => (
+                          {openingHours.map((hour, index) => (
                             <div key={index} className="flex justify-between gap-8 text-sm">
                               <span className="text-nhero-charcoal">
                                 {dayTranslations[hour.day] || hour.day}

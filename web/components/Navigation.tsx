@@ -128,7 +128,7 @@ export default function Navigation() {
           </div>
 
           {/* Mobile Menu Button - placeholder for layout */}
-          <div className="lg:hidden w-8 h-8" />
+          <div className="lg:hidden w-12 h-12" />
         </div>
         </nav>
         </div>
@@ -138,9 +138,9 @@ export default function Navigation() {
       {/* Mobile Menu Button - Fixed position to stay on top of fullscreen menu */}
       <button
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        className="lg:hidden fixed top-4 right-4 w-8 h-8 flex items-center justify-center text-nhero-cream z-[60]"
+        className="lg:hidden fixed top-8 right-8 w-16 h-12 flex items-center justify-center text-nhero-cream z-60"
         aria-label="Toggle menu"
-        style={{ right: '1rem' }}
+        style={{ right: '2.5rem' }}
       >
         <div className="relative w-6 h-5 flex flex-col justify-center items-center">
           <motion.span

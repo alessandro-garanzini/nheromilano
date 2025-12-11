@@ -1,5 +1,5 @@
 import { createDirectus, rest, staticToken, readSingleton, readItems, readItem } from '@directus/sdk';
-import type { DirectusSchema } from '@/types/directus';
+import type { DirectusSchema, Globals } from '@/types/directus';
 
 /**
  * Directus Client Configuration
@@ -61,13 +61,14 @@ export function getOptimizedImageUrl(
  * Data fetching helpers with proper type safety
  */
 
-export async function getGlobals() {
+export async function getGlobals(): Promise<Globals | null> {
   try {
-    return await directus.request(
+    const result = await directus.request(
       readSingleton('globals', {
         fields: ['*']
       })
     );
+    return result as Globals;
   } catch (error) {
     console.error('Error fetching globals:', error);
     return null;

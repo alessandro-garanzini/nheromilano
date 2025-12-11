@@ -6,6 +6,7 @@ import Footer from '@/components/Footer';
 import FloatingDock from '@/components/FloatingDock';
 import { getGlobals } from '@/lib/directus';
 import { locales } from '@/next-intl.config';
+import type { Globals } from '@/types/directus';
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -26,7 +27,7 @@ export default async function LocaleLayout({
   }
 
   const messages = await getMessages();
-  const globals = await getGlobals();
+  const globals: Globals | null = await getGlobals();
 
   return (
     <NextIntlClientProvider messages={messages}>

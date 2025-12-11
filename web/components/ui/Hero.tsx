@@ -81,7 +81,7 @@ export default function Hero({
           animation="blurInUp"
           by="word"
           delay={0.5}
-          className="text-white text-xl md:text-2xl lg:text-3xl font-light tracking-wider"
+          className="text-white text-xl md:text-2xl lg:text-3xl font-semibold tracking-wider"
         >
           A TASTE OF GOOD TASTE
         </TextAnimate>
