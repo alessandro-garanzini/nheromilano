@@ -19,7 +19,7 @@ export default function DirectusImage({
   src,
   width,
   height,
-  quality = 80,
+  quality = 75,
   alt,
   ...props
 }: DirectusImageProps) {
