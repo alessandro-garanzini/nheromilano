@@ -27,23 +27,23 @@ export function getDirectusFileUrl(
   }
 ): string | null {
   if (!fileId) return null;
-  
+
   const baseUrl = process.env.NEXT_PUBLIC_DIRECTUS_URL;
   const params = new URLSearchParams();
-  
+
   if (options?.width) params.append('width', options.width.toString());
   if (options?.height) params.append('height', options.height.toString());
   if (options?.quality) params.append('quality', options.quality.toString());
   if (options?.format) params.append('format', options.format);
   if (options?.fit) params.append('fit', options.fit);
-  
+
   const queryString = params.toString();
   return `${baseUrl}/assets/${fileId}${queryString ? `?${queryString}` : ''}`;
 }
 
 /**
  * Helper to get Directus asset URL for Next.js Image component
- * Optimized defaults: webp format, quality 80
+ * Optimized defaults: webp format, quality 75
  */
 export function getOptimizedImageUrl(
   fileId: string | undefined | null,
@@ -51,7 +51,7 @@ export function getOptimizedImageUrl(
 ): string | null {
   return getDirectusFileUrl(fileId, {
     width,
-    quality: 80,
+    quality: 75,
     format: 'auto',
     fit: 'cover'
   });
