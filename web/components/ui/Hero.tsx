@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import type { ReactNode } from 'react';
+import { TextAnimate } from '@/components/ui/text-animate';
 
 interface HeroProps {
   title: string;
@@ -56,7 +57,7 @@ export default function Hero({
       />
 
       {/* Content - centered */}
-      <div className={`relative z-10 container flex flex-col ${alignClasses[align]} justify-center`}>
+      <div className={`relative z-10 container flex flex-col ${alignClasses[align]} justify-center gap-6`}>
         {/* White Logo */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -74,6 +75,16 @@ export default function Hero({
             unoptimized
           />
         </motion.div>
+
+        {/* Animated Text */}
+        <TextAnimate
+          animation="blurInUp"
+          by="word"
+          delay={0.5}
+          className="text-white text-xl md:text-2xl lg:text-3xl font-light tracking-wider"
+        >
+          A TASTE OF GOOD TASTE
+        </TextAnimate>
       </div>
     </section>
   );
