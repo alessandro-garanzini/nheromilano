@@ -66,9 +66,9 @@ export default function Navigation() {
             <Image
               src="/nhero_white_logo.png"
               alt="Nhero Milano"
-              width={150}
+              width={160}
               height={48}
-              className="w-auto h-10"
+              className="h-10"
               priority
             />
           </Link>
