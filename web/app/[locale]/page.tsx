@@ -29,6 +29,8 @@ export default async function HomePage() {
           typeof avviso.foto === 'string' ? avviso.foto : avviso.foto.id
         )
       : null,
+    cta_label: avviso.cta_label,
+    cta_url: avviso.cta_url,
   }));
 
   return (

@@ -15,6 +15,8 @@ interface AvvisoWithImageUrl {
   titolo: string;
   descrizione: string;
   imageUrl: string | null;
+  cta_label?: string;
+  cta_url?: string;
 }
 
 interface AvvisiModalProps {
@@ -76,19 +78,32 @@ export default function AvvisiModal({ avvisi }: AvvisiModalProps) {
             />
           </DialogDescription>
 
-          <div className="mt-6 flex items-center justify-between">
+          <div className="mt-6 flex items-center justify-between gap-4">
             {avvisi.length > 1 && (
               <span className="text-nhero-cream/60 text-sm">
                 {currentIndex + 1} / {avvisi.length}
               </span>
             )}
 
-            <button
-              onClick={handleNext}
-              className="ml-auto bg-nhero-cream text-nhero-green px-6 py-2 font-medium text-sm uppercase tracking-wider focus:outline-none focus:ring-0 active:outline-none"
-            >
-              {currentIndex < avvisi.length - 1 ? 'Avanti' : 'Chiudi'}
-            </button>
+            <div className="ml-auto flex gap-3">
+              {currentAvviso.cta_label && currentAvviso.cta_url && (
+                <a
+                  href={currentAvviso.cta_url}
+                  target={currentAvviso.cta_url.startsWith('http') ? '_blank' : undefined}
+                  rel={currentAvviso.cta_url.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  className="bg-nhero-cream text-nhero-green px-6 py-2 font-medium text-sm uppercase tracking-wider hover:bg-nhero-cream/90 transition-colors focus:outline-none focus:ring-0 active:outline-none flex items-center justify-center"
+                >
+                  {currentAvviso.cta_label}
+                </a>
+              )}
+
+              <button
+                onClick={handleNext}
+                className="bg-nhero-gold text-nhero-green px-6 py-2 font-medium text-sm uppercase tracking-wider focus:outline-none focus:ring-0 active:outline-none"
+              >
+                {currentIndex < avvisi.length - 1 ? 'Avanti' : 'Chiudi'}
+              </button>
+            </div>
           </div>
         </div>
       </DialogContent>

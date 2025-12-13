@@ -143,6 +143,8 @@ export interface Avviso {
   titolo: string;
   descrizione: string;
   foto?: string | DirectusFile;
+  cta_label?: string;
+  cta_url?: string;
   user_created?: string;
   date_created?: string;
   user_updated?: string;
