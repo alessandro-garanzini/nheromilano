@@ -49,7 +49,7 @@ export default function AvvisiModal({ avvisi }: AvvisiModalProps) {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent
-        className="bg-nhero-green border-8 border-nhero-green rounded-none p-0 sm:max-w-2xl max-h-[90vh] overflow-hidden"
+        className="bg-nhero-green border-8 border-nhero-green rounded-none p-0 sm:max-w-2xl max-h-[90vh] overflow-hidden outline-none focus:outline-none focus-visible:outline-none"
         showCloseButton={false}
       >
         {imageUrl && (
@@ -91,7 +91,7 @@ export default function AvvisiModal({ avvisi }: AvvisiModalProps) {
                   href={currentAvviso.cta_url}
                   target={currentAvviso.cta_url.startsWith('http') ? '_blank' : undefined}
                   rel={currentAvviso.cta_url.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className="bg-nhero-cream text-nhero-green px-6 py-2 font-medium text-sm uppercase tracking-wider hover:bg-nhero-cream/90 transition-colors focus:outline-none focus:ring-0 active:outline-none flex items-center justify-center"
+                  className="bg-nhero-cream text-nhero-green px-6 py-2 font-medium text-sm uppercase tracking-wider hover:bg-nhero-cream/90 transition-colors outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0 active:outline-none flex items-center justify-center"
                 >
                   {currentAvviso.cta_label}
                 </a>
@@ -99,7 +99,7 @@ export default function AvvisiModal({ avvisi }: AvvisiModalProps) {
 
               <button
                 onClick={handleNext}
-                className="bg-nhero-gold text-nhero-green px-6 py-2 font-medium text-sm uppercase tracking-wider focus:outline-none focus:ring-0 active:outline-none"
+                className="bg-nhero-gold text-nhero-green px-6 py-2 font-medium text-sm uppercase tracking-wider outline-none! focus:outline-none! focus-visible:outline-none! ring-0! focus:ring-0! focus-visible:ring-0! active:outline-none! border-0! focus:border-0!"
               >
                 {currentIndex < avvisi.length - 1 ? 'Avanti' : 'Chiudi'}
               </button>
