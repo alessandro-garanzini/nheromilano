@@ -28,6 +28,7 @@ export interface Globals {
   instagram?: string;
   facebook?: string;
   tiktok?: string;
+  linkedin?: string;
   reservation_url?: string;
   delivery_url?: string;
 }
