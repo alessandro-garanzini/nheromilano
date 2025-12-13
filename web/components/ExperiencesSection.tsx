@@ -47,20 +47,11 @@ export default function ExperiencesSection({
   return (
     <section
       id="esperienze"
-      className="pt-12 pb-12 bg-nhero-green"
+      className="pt-16 pb-16 md:pt-24 md:pb-24 bg-nhero-green"
     >
-      <div className="container">
-        {/* Header */}
-        <BlurFade delay={0} inView>
-          <div className="max-w-3xl mb-16 md:mb-24">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium text-nhero-cream uppercase tracking-wide">
-              {title}
-            </h2>
-          </div>
-        </BlurFade>
-
+      <div className="px-6 md:px-12 lg:px-16">
         {/* Experiences Grid */}
-        <div className="grid gap-12 md:gap-16 lg:gap-20">
+        <div className="grid gap-16 md:gap-24 lg:gap-32">
           {experiences.map((experience, index) => {
             const imageId =
               typeof experience.hero_image === "string"
@@ -80,12 +71,12 @@ export default function ExperiencesSection({
                 inViewMargin="-100px"
               >
                 <div
-                  className={`grid md:grid-cols-2 gap-6 md:gap-12 items-center ${
+                  className={`grid md:grid-cols-2 gap-8 md:gap-16 lg:gap-20 items-start ${
                     isEven ? "" : "md:[direction:rtl]"
                   }`}
                 >
                   {/* Image */}
-                  <div className="relative aspect-4/3 md:aspect-3/2 overflow-hidden md:[direction:ltr]">
+                  <div className="relative aspect-[16/10] md:aspect-[4/3] overflow-hidden md:[direction:ltr]">
                     {imageUrl && (
                       <div
                         className="absolute inset-0 bg-cover bg-center"
@@ -96,7 +87,7 @@ export default function ExperiencesSection({
                   </div>
 
                   {/* Content */}
-                  <div className="md:[direction:ltr] space-y-4 md:space-y-6">
+                  <div className="md:[direction:ltr] space-y-4 md:space-y-6 md:pt-0">
 
                     {/* Title & Subtitle */}
                     <div>
