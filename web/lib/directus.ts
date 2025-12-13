@@ -58,6 +58,18 @@ export function getOptimizedImageUrl(
 }
 
 /**
+ * Get base Directus asset URL without query params
+ * Use this when Next.js Image loader will handle optimization
+ */
+export function getDirectusAssetUrl(
+  fileId: string | undefined | null
+): string | null {
+  if (!fileId) return null;
+  const baseUrl = process.env.NEXT_PUBLIC_DIRECTUS_URL;
+  return `${baseUrl}/assets/${fileId}`;
+}
+
+/**
  * Data fetching helpers with proper type safety
  */
 

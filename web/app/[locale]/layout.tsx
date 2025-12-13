@@ -36,7 +36,6 @@ export default async function LocaleLayout({
         <main>
           {children}
         </main>
-        <Footer globals={globals} />
         <FloatingDock
           reservationUrl={globals?.reservation_url}
           deliveryUrl={globals?.delivery_url}
@@ -44,6 +43,7 @@ export default async function LocaleLayout({
           phone={globals?.phone}
         />
       </div>
+      <Footer globals={globals} />
     </NextIntlClientProvider>
   );
 }
