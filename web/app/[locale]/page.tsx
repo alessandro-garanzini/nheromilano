@@ -3,6 +3,8 @@ import { getExperiences, getActiveAvvisi, getPageBySlug } from '@/lib/directus';
 import { getOptimizedImageUrl, getDirectusAssetUrl } from '@/lib/directus';
 import Hero from '@/components/ui/Hero';
 import ExperiencesSection from '@/components/ExperiencesSection';
+import BusinessSection from '@/components/BusinessSection';
+import EventiSection from '@/components/EventiSection';
 import AvvisiModal from '@/components/AvvisiModal';
 
 export const revalidate = 60;
@@ -51,6 +53,12 @@ export default async function HomePage() {
         experiences={experiences}
         title={t('title')}
       />
+
+      {/* Business Section */}
+      <BusinessSection />
+
+      {/* Eventi Section */}
+      <EventiSection />
 
     </>
   );
