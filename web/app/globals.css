@@ -15,7 +15,7 @@
   --border-color: var(--nhero-cream);
 
   /* Frame Border */
-  --frame-border: 12px;
+  --frame-border: 18px;
 
   /* Spacing */
   --section-padding: 6rem;
@@ -136,7 +136,7 @@ h1, h2, h3, h4, h5, h6 {
 .frame-border {
   position: fixed;
   background: var(--border-color);
-  z-index: 9999;
+  z-index: 40;
   pointer-events: none;
 }
 
