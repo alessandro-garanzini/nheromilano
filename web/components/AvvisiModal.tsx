@@ -49,12 +49,12 @@ export default function AvvisiModal({ avvisi }: AvvisiModalProps) {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent
-        className="bg-nhero-cream border-none rounded-none p-0 sm:max-w-4xl max-h-[90vh] overflow-hidden outline-none focus:outline-none focus-visible:outline-none shadow-2xl"
+        className="bg-nhero-cream border-none rounded-none p-0 w-full h-full max-w-full max-h-full sm:w-auto sm:h-auto sm:max-w-4xl sm:max-h-[90vh] overflow-hidden outline-none focus:outline-none focus-visible:outline-none shadow-2xl"
         showCloseButton={true}
       >
-        <div className="flex flex-col md:flex-row h-full">
+        <div className="flex flex-col md:flex-row h-full overflow-y-auto md:overflow-hidden">
           {imageUrl && (
-            <div className="relative w-full md:w-1/2 aspect-square md:aspect-auto md:min-h-[500px]">
+            <div className="relative w-full md:w-1/2 h-[40vh] md:h-auto md:aspect-auto md:min-h-[500px] flex-shrink-0">
               <Image
                 src={imageUrl}
                 alt={currentAvviso.titolo}
@@ -65,10 +65,10 @@ export default function AvvisiModal({ avvisi }: AvvisiModalProps) {
             </div>
           )}
 
-          <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-between">
+          <div className="w-full md:w-1/2 p-6 md:p-12 flex flex-col justify-between md:overflow-y-auto">
             <div className="flex-1">
-              <DialogHeader className="mb-6">
-                <DialogTitle className="text-nhero-green text-3xl md:text-4xl font-serif font-normal leading-tight">
+              <DialogHeader className="mb-4 md:mb-6">
+                <DialogTitle className="text-nhero-green text-2xl md:text-4xl font-serif font-normal leading-tight">
                   {currentAvviso.titolo}
                 </DialogTitle>
               </DialogHeader>
@@ -81,13 +81,13 @@ export default function AvvisiModal({ avvisi }: AvvisiModalProps) {
               </DialogDescription>
             </div>
 
-            <div className="mt-4 space-y-10">
+            <div className="mt-6 md:mt-4 space-y-3 md:space-y-10 flex-shrink-0">
               {currentAvviso.cta_label && currentAvviso.cta_url && (
                 <a
                   href={currentAvviso.cta_url}
                   target={currentAvviso.cta_url.startsWith('http') ? '_blank' : undefined}
                   rel={currentAvviso.cta_url.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className="block w-full bg-nhero-green text-nhero-cream px-8 py-3 font-medium text-sm uppercase tracking-wider hover:bg-nhero-green/90 transition-colors outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0 active:outline-none text-center"
+                  className="block w-full bg-nhero-green text-nhero-cream px-6 md:px-8 py-3 font-medium text-sm uppercase tracking-wider hover:bg-nhero-green/90 transition-colors outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0 active:outline-none text-center"
                 >
                   {currentAvviso.cta_label}
                 </a>
@@ -103,7 +103,7 @@ export default function AvvisiModal({ avvisi }: AvvisiModalProps) {
                 {currentIndex < avvisi.length - 1 && (
                   <button
                     onClick={handleNext}
-                    className="ml-auto bg-transparent text-nhero-green px-8 py-3 font-medium text-sm uppercase tracking-wider border border-nhero-green hover:bg-nhero-green/5 transition-colors outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0 active:outline-none"
+                    className="ml-auto bg-transparent text-nhero-green px-6 md:px-8 py-3 font-medium text-sm uppercase tracking-wider border border-nhero-green hover:bg-nhero-green/5 transition-colors outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0 active:outline-none"
                   >
                     Avanti
                   </button>
