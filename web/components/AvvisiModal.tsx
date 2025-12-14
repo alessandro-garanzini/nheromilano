@@ -49,60 +49,64 @@ export default function AvvisiModal({ avvisi }: AvvisiModalProps) {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent
-        className="bg-nhero-green border-8 border-nhero-green rounded-none p-0 sm:max-w-2xl max-h-[90vh] overflow-hidden outline-none focus:outline-none focus-visible:outline-none"
-        showCloseButton={false}
+        className="bg-nhero-cream border-none rounded-none p-0 sm:max-w-4xl max-h-[90vh] overflow-hidden outline-none focus:outline-none focus-visible:outline-none shadow-2xl"
+        showCloseButton={true}
       >
-        {imageUrl && (
-          <div className="relative w-full aspect-[16/10]">
-            <Image
-              src={imageUrl}
-              alt={currentAvviso.titolo}
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
-        )}
+        <div className="flex flex-col md:flex-row h-full">
+          {imageUrl && (
+            <div className="relative w-full md:w-1/2 aspect-square md:aspect-auto md:min-h-[500px]">
+              <Image
+                src={imageUrl}
+                alt={currentAvviso.titolo}
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+          )}
 
-        <div className="p-6 pt-4">
-          <DialogHeader className="mb-4">
-            <DialogTitle className="text-nhero-cream text-xl font-medium">
-              {currentAvviso.titolo}
-            </DialogTitle>
-          </DialogHeader>
+          <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-between">
+            <div className="flex-1">
+              <DialogHeader className="mb-6">
+                <DialogTitle className="text-nhero-green text-3xl md:text-4xl font-serif font-normal leading-tight">
+                  {currentAvviso.titolo}
+                </DialogTitle>
+              </DialogHeader>
 
-          <DialogDescription asChild>
-            <div
-              className="text-nhero-cream/80 prose prose-sm prose-invert max-w-none [&_a]:text-nhero-gold [&_a]:underline [&_p]:text-nhero-cream/80"
-              dangerouslySetInnerHTML={{ __html: currentAvviso.descrizione }}
-            />
-          </DialogDescription>
+              <DialogDescription asChild>
+                <div
+                  className="text-nhero-charcoal/80 prose prose-sm max-w-none [&_a]:text-nhero-gold [&_a]:underline [&_p]:text-nhero-charcoal/80 [&_p]:mb-4"
+                  dangerouslySetInnerHTML={{ __html: currentAvviso.descrizione }}
+                />
+              </DialogDescription>
+            </div>
 
-          <div className="mt-6 flex items-center justify-between gap-4">
-            {avvisi.length > 1 && (
-              <span className="text-nhero-cream/60 text-sm">
-                {currentIndex + 1} / {avvisi.length}
-              </span>
-            )}
-
-            <div className="ml-auto flex gap-3">
+            <div className="mt-8 space-y-4">
               {currentAvviso.cta_label && currentAvviso.cta_url && (
                 <a
                   href={currentAvviso.cta_url}
                   target={currentAvviso.cta_url.startsWith('http') ? '_blank' : undefined}
                   rel={currentAvviso.cta_url.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className="bg-nhero-cream text-nhero-green px-6 py-2 font-medium text-sm uppercase tracking-wider hover:bg-nhero-cream/90 transition-colors outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0 active:outline-none flex items-center justify-center"
+                  className="block w-full bg-nhero-green text-nhero-cream px-8 py-3 font-medium text-sm uppercase tracking-wider hover:bg-nhero-green/90 transition-colors outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0 active:outline-none text-center"
                 >
                   {currentAvviso.cta_label}
                 </a>
               )}
 
-              <button
-                onClick={handleNext}
-                className="bg-nhero-gold text-nhero-green px-6 py-2 font-medium text-sm uppercase tracking-wider outline-none! focus:outline-none! focus-visible:outline-none! ring-0! focus:ring-0! focus-visible:ring-0! active:outline-none! border-0! focus:border-0!"
-              >
-                {currentIndex < avvisi.length - 1 ? 'Avanti' : 'Chiudi'}
-              </button>
+              <div className="flex items-center justify-between gap-4">
+                {avvisi.length > 1 && (
+                  <span className="text-nhero-charcoal/60 text-sm">
+                    {currentIndex + 1} / {avvisi.length}
+                  </span>
+                )}
+
+                <button
+                  onClick={handleNext}
+                  className="ml-auto bg-transparent text-nhero-green px-8 py-3 font-medium text-sm uppercase tracking-wider border border-nhero-green hover:bg-nhero-green/5 transition-colors outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0 active:outline-none"
+                >
+                  {currentIndex < avvisi.length - 1 ? 'Avanti' : 'Chiudi'}
+                </button>
+              </div>
             </div>
           </div>
         </div>
