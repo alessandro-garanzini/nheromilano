@@ -104,7 +104,7 @@ export default function Footer({ globals }: FooterProps) {
       {/* year, mini logo, privacy and cookie policy*/}
       <div className="bg-nhero-dark-green text-nhero-cream text-sm py-4 mt-8 mb-8">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 px-6">
-          <div className="flex items-center gap-2">
+          <div className="flex flex-col items-center md:items-start gap-3">
             <Image
               src="/nhero_white_logo.png"
               alt="Nhero Milano"
@@ -112,6 +112,12 @@ export default function Footer({ globals }: FooterProps) {
               height={20}
               className="inline-block"
             />
+            <div className="text-xs text-nhero-cream/80 text-center md:text-left leading-relaxed">
+              <div>RIAL CAFE&apos; S.R.L.</div>
+              <div>P.IVA & C.F.: 04338860960</div>
+              <div>VIA FELICE CASATI 44, 20124, MILANO (MI)</div>
+              <div>Rea: 1740237</div>
+            </div>
           </div>
           <div className="flex gap-4">
             <a href="/privacy-policy" className="hover:text-nhero-gold transition-colors duration-300">

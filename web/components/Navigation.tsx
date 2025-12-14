@@ -64,7 +64,7 @@ export default function Navigation() {
 
   return (
     <>
-    <header className="fixed top-3 left-3 right-3 z-40">
+    <header className="fixed top-3 left-3 right-3 z-20">
       <BlurFade
         direction="down"
         duration={0.5}
@@ -226,9 +226,9 @@ export default function Navigation() {
               <Image
                 src="/nhero_white_logo.png"
                 alt="Nhero Milano"
-                width={280}
-                height={42}
-                className="h-9 mt-10 "
+                width={220}
+                height={50}
+                className="h-9 mt-6 "
               />
             </BlurFade>
           </motion.div>
