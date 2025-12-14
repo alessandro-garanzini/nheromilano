@@ -53,17 +53,22 @@ export default function AvvisiModal({ avvisi }: AvvisiModalProps) {
         showCloseButton={true}
       >
         <div className="flex flex-col md:flex-row h-full overflow-y-auto md:overflow-hidden">
-          {imageUrl && (
-            <div className="relative w-full md:w-1/2 h-[40vh] md:h-auto md:aspect-auto md:min-h-[500px] flex-shrink-0">
+          {/* Always show image container on mobile, conditionally on desktop */}
+          <div
+            className={`relative w-full md:w-1/2 min-h-[40vh] md:min-h-[500px] shrink-0 bg-nhero-green/10 ${!imageUrl ? 'md:hidden' : ''}`}
+            style={{ height: '40vh' }}
+          >
+            {imageUrl && (
               <Image
                 src={imageUrl}
                 alt={currentAvviso.titolo}
                 fill
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover"
                 priority
               />
-            </div>
-          )}
+            )}
+          </div>
 
           <div className="w-full md:w-1/2 p-6 md:p-12 flex flex-col justify-between md:overflow-y-auto">
             <div className="flex-1">
