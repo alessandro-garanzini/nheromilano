@@ -81,7 +81,7 @@ export default function AvvisiModal({ avvisi }: AvvisiModalProps) {
               </DialogDescription>
             </div>
 
-            <div className="mt-8 space-y-4">
+            <div className="mt-4 space-y-10">
               {currentAvviso.cta_label && currentAvviso.cta_url && (
                 <a
                   href={currentAvviso.cta_url}
@@ -100,12 +100,14 @@ export default function AvvisiModal({ avvisi }: AvvisiModalProps) {
                   </span>
                 )}
 
-                <button
-                  onClick={handleNext}
-                  className="ml-auto bg-transparent text-nhero-green px-8 py-3 font-medium text-sm uppercase tracking-wider border border-nhero-green hover:bg-nhero-green/5 transition-colors outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0 active:outline-none"
-                >
-                  {currentIndex < avvisi.length - 1 ? 'Avanti' : 'Chiudi'}
-                </button>
+                {currentIndex < avvisi.length - 1 && (
+                  <button
+                    onClick={handleNext}
+                    className="ml-auto bg-transparent text-nhero-green px-8 py-3 font-medium text-sm uppercase tracking-wider border border-nhero-green hover:bg-nhero-green/5 transition-colors outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0 active:outline-none"
+                  >
+                    Avanti
+                  </button>
+                )}
               </div>
             </div>
           </div>
