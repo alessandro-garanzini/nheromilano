@@ -116,7 +116,7 @@ export default function Navigation() {
                 </Link>
               </BlurFade>
             ))}
-            <BlurFade
+            {/* <BlurFade
               delay={0.1 + navItems.length * 0.05}
               duration={0.4}
               direction="down"
@@ -124,7 +124,7 @@ export default function Navigation() {
               blur="3px"
             >
               <LanguageSwitcher />
-            </BlurFade>
+            </BlurFade> */}
           </div>
 
           {/* Mobile Menu Button - placeholder for layout */}
