@@ -69,7 +69,7 @@ export default function ExperiencesSection({
       id="esperienze"
       className="pt-16 pb-16 md:pt-24 md:pb-24 bg-nhero-green"
     >
-      <div className="px-6 md:px-12 lg:px-16">
+      <div className="px-4 md:px-12 lg:px-16">
         {/* Experiences Grid */}
         <div className="grid gap-12 md:gap-24 lg:gap-32">
           {experiences.map((experience, index) => {
@@ -93,8 +93,8 @@ export default function ExperiencesSection({
               >
                 {/* Mobile Layout */}
                 <div className="md:hidden flex flex-col">
-                  {/* Image - Always centered */}
-                  <div className="relative aspect-[16/10] overflow-hidden mb-6">
+                  {/* Image - Always centered, bigger */}
+                  <div className="relative aspect-square overflow-hidden mb-5">
                     {imageUrl && (
                       <div
                         className="absolute inset-0 bg-cover bg-center"
@@ -109,9 +109,9 @@ export default function ExperiencesSection({
                     className={`flex flex-col ${isEven ? "items-start" : "items-end"}`}
                   >
                     {/* Icon */}
-                    <div className="mb-3">
+                    <div className="mb-2">
                       <IconComponent
-                        size={48}
+                        size={44}
                         weight="duotone"
                         className="text-nhero-gold"
                       />
@@ -119,7 +119,7 @@ export default function ExperiencesSection({
 
                     {/* Title */}
                     <h3
-                      className={`text-2xl font-medium text-nhero-cream uppercase tracking-wide mb-3 ${isEven ? "text-left" : "text-right"}`}
+                      className={`text-xl font-medium text-nhero-cream tracking-wide mb-2 ${isEven ? "text-left" : "text-right"}`}
                     >
                       {experience.title}
                     </h3>
@@ -127,7 +127,7 @@ export default function ExperiencesSection({
                     {/* Description */}
                     {experience.description && (
                       <p
-                        className={`text-nhero-cream/70 text-sm leading-relaxed uppercase tracking-wide ${isEven ? "text-left" : "text-right"}`}
+                        className={`text-nhero-cream/70 text-sm leading-relaxed ${isEven ? "text-left" : "text-right"}`}
                       >
                         {stripHtmlAndDecode(experience.description)}
                       </p>
