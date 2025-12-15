@@ -2,16 +2,36 @@
 
 import { BlurFade } from "@/components/ui/BlurFade";
 import type { Experience } from "@/types/directus";
+import {
+  CookingPotIcon,
+  PizzaIcon,
+  MartiniIcon,
+  BreadIcon,
+  ForkKnifeIcon,
+  type Icon,
+} from "@phosphor-icons/react";
 
 interface ExperiencesSectionProps {
   experiences: Experience[];
   title: string;
 }
 
+// Map Material Symbols icon names to Phosphor duotone icons
+const iconMap: Record<string, Icon> = {
+  bakery_dining: BreadIcon,
+  restaurant: ForkKnifeIcon,
+  local_bar: MartiniIcon,
+  local_pizza: PizzaIcon,
+  cooking: CookingPotIcon,
+};
+
+function getExperienceIcon(iconName?: string): Icon {
+  if (!iconName) return ForkKnifeIcon;
+  return iconMap[iconName] || ForkKnifeIcon;
+}
+
 function stripHtmlAndDecode(html: string): string {
-  // First strip HTML tags
   const stripped = html.replace(/<[^>]*>/g, "").trim();
-  // Then decode HTML entities like &agrave; -> à
   return stripped
     .replace(/&agrave;/g, "à")
     .replace(/&egrave;/g, "è")
@@ -51,7 +71,7 @@ export default function ExperiencesSection({
     >
       <div className="px-6 md:px-12 lg:px-16">
         {/* Experiences Grid */}
-        <div className="grid gap-16 md:gap-24 lg:gap-32">
+        <div className="grid gap-12 md:gap-24 lg:gap-32">
           {experiences.map((experience, index) => {
             const imageId =
               typeof experience.hero_image === "string"
@@ -62,6 +82,7 @@ export default function ExperiencesSection({
               : null;
 
             const isEven = index % 2 === 0;
+            const IconComponent = getExperienceIcon(experience.icon);
 
             return (
               <BlurFade
@@ -70,13 +91,58 @@ export default function ExperiencesSection({
                 inView
                 inViewMargin="-100px"
               >
+                {/* Mobile Layout */}
+                <div className="md:hidden flex flex-col">
+                  {/* Image - Always centered */}
+                  <div className="relative aspect-[16/10] overflow-hidden mb-6">
+                    {imageUrl && (
+                      <div
+                        className="absolute inset-0 bg-cover bg-center"
+                        style={{ backgroundImage: `url(${imageUrl})` }}
+                      />
+                    )}
+                    <div className="absolute inset-0 bg-nhero-charcoal/20" />
+                  </div>
+
+                  {/* Icon + Title + Description - Alternating alignment */}
+                  <div
+                    className={`flex flex-col ${isEven ? "items-start" : "items-end"}`}
+                  >
+                    {/* Icon */}
+                    <div className="mb-3">
+                      <IconComponent
+                        size={48}
+                        weight="duotone"
+                        className="text-nhero-gold"
+                      />
+                    </div>
+
+                    {/* Title */}
+                    <h3
+                      className={`text-2xl font-medium text-nhero-cream uppercase tracking-wide mb-3 ${isEven ? "text-left" : "text-right"}`}
+                    >
+                      {experience.title}
+                    </h3>
+
+                    {/* Description */}
+                    {experience.description && (
+                      <p
+                        className={`text-nhero-cream/70 text-sm leading-relaxed uppercase tracking-wide ${isEven ? "text-left" : "text-right"}`}
+                      >
+                        {stripHtmlAndDecode(experience.description)}
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                {/* Desktop Layout - Original two-column grid */}
                 <div
-                  className={`grid md:grid-cols-2 gap-8 md:gap-16 lg:gap-20 items-start ${
+                  className={`hidden md:grid md:grid-cols-2 gap-8 md:gap-16 lg:gap-20 items-start ${
                     isEven ? "" : "md:[direction:rtl]"
                   }`}
                 >
                   {/* Image */}
-                  <div className="relative aspect-[16/10] md:aspect-[4/3] overflow-hidden md:[direction:ltr]">
+                  <div className="relative aspect-4/3 overflow-hidden md:[direction:ltr]">
                     {imageUrl && (
                       <div
                         className="absolute inset-0 bg-cover bg-center"
@@ -88,22 +154,21 @@ export default function ExperiencesSection({
 
                   {/* Content */}
                   <div className="md:[direction:ltr] space-y-4 md:space-y-6 md:pt-0">
+                    {/* Icon */}
+                    <IconComponent
+                      size={56}
+                      weight="duotone"
+                      className="text-nhero-gold"
+                    />
 
-                    {/* Title & Subtitle */}
-                    <div>
-                      <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium text-nhero-cream uppercase tracking-wide mb-2">
-                        {experience.title}
-                      </h3>
-                      {/* {experience.subtitle && (
-                        <p className="text-nhero-cream/60 text-sm md:text-base uppercase tracking-wider">
-                          {experience.subtitle}
-                        </p>
-                      )} */}
-                    </div>
+                    {/* Title */}
+                    <h3 className="text-3xl lg:text-4xl font-medium text-nhero-cream uppercase tracking-wide">
+                      {experience.title}
+                    </h3>
 
-                    {/* Description - Full text */}
+                    {/* Description */}
                     {experience.description && (
-                      <p className="text-nhero-cream/70 text-sm md:text-base leading-relaxed uppercase tracking-wide">
+                      <p className="text-nhero-cream/70 text-base leading-relaxed uppercase tracking-wide">
                         {stripHtmlAndDecode(experience.description)}
                       </p>
                     )}

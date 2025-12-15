@@ -174,7 +174,7 @@ export default function Navigation() {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            className="lg:hidden fixed inset-0 w-screen h-screen bg-nhero-green z-50 flex flex-col items-center justify-center overflow-hidden"
+            className="lg:hidden fixed inset-0 w-screen h-screen bg-nhero-green z-30 flex flex-col items-center justify-center overflow-hidden"
             initial={{ clipPath: 'circle(0% at calc(100% - 2rem) 1.5rem)' }}
             animate={{ clipPath: 'circle(150% at calc(100% - 2rem) 1.5rem)' }}
             exit={{ clipPath: 'circle(0% at calc(100% - 2rem) 1.5rem)' }}
