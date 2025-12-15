@@ -53,6 +53,56 @@ export default function LoaderScreen() {
 
   return (
     <>
+      {/* Loader frame - matches the site frame but with higher z-index */}
+      <div
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: 'var(--frame-border)',
+          backgroundColor: 'var(--border-color)',
+          zIndex: 9999,
+          pointerEvents: 'none',
+        }}
+      />
+      <div
+        style={{
+          position: 'fixed',
+          top: 0,
+          right: 0,
+          bottom: 0,
+          width: 'var(--frame-border)',
+          backgroundColor: 'var(--border-color)',
+          zIndex: 9999,
+          pointerEvents: 'none',
+        }}
+      />
+      <div
+        style={{
+          position: 'fixed',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: 'var(--frame-border)',
+          backgroundColor: 'var(--border-color)',
+          zIndex: 9999,
+          pointerEvents: 'none',
+        }}
+      />
+      <div
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          bottom: 0,
+          width: 'var(--frame-border)',
+          backgroundColor: 'var(--border-color)',
+          zIndex: 9999,
+          pointerEvents: 'none',
+        }}
+      />
+
       {/* Global keyframes */}
       <style>
         {`
