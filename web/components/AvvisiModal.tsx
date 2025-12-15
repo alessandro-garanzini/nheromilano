@@ -73,7 +73,7 @@ export default function AvvisiModal({ avvisi }: AvvisiModalProps) {
           <div className="w-full md:w-1/2 p-6 md:p-12 flex flex-col justify-between md:overflow-y-auto">
             <div className="flex-1">
               <DialogHeader className="mb-4 md:mb-6">
-                <DialogTitle className="text-nhero-green text-2xl md:text-4xl font-serif font-normal leading-tight">
+                <DialogTitle className="text-nhero-green text-2xl md:text-4xl leading-tight">
                   {currentAvviso.titolo}
                 </DialogTitle>
               </DialogHeader>
