@@ -92,9 +92,9 @@ export default function ExperiencesSection({
                 inViewMargin="-100px"
               >
                 {/* Mobile Layout */}
-                <div className="md:hidden flex flex-col">
-                  {/* Image - Always centered, bigger */}
-                  <div className="relative aspect-square overflow-hidden mb-5">
+                <div className="md:hidden flex flex-col -mx-4">
+                  {/* Image - Full width, taller */}
+                  <div className="relative aspect-[5/4] overflow-hidden mb-5">
                     {imageUrl && (
                       <div
                         className="absolute inset-0 bg-cover bg-center"
@@ -106,7 +106,7 @@ export default function ExperiencesSection({
 
                   {/* Icon + Title + Description - Alternating alignment */}
                   <div
-                    className={`flex flex-col ${isEven ? "items-start" : "items-end"}`}
+                    className={`flex flex-col px-4 ${isEven ? "items-start" : "items-end"}`}
                   >
                     {/* Icon */}
                     <div className="mb-2">

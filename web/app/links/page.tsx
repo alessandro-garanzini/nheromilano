@@ -1,7 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { getGlobals } from '@/lib/directus';
 
-export default function LinksPage() {
+export default async function LinksPage() {
+  const globals = await getGlobals();
+
   const links = [
     {
       title: 'Sito Web',
@@ -10,26 +13,22 @@ export default function LinksPage() {
     },
     {
       title: 'Menu',
-      href: '/it/menu',
+      href: globals?.menu_url || 'https://www.jmenu.it/menu-nhero-milano/',
       icon: '📖',
+      external: true,
     },
     {
       title: 'Prenota un Tavolo',
-      href: 'https://www.thefork.it/ristorante/nhero-r692042',
+      href: globals?.reservation_url || '#',
       icon: '🍽️',
       external: true,
     },
     {
       title: 'Ordina da Casa',
-      href: 'https://deliveroo.it/it/menu/milano/centro-storico/nhero-milano',
+      href: globals?.delivery_url || '#',
       icon: '🚴',
       external: true,
-    },
-    {
-      title: 'Contattaci',
-      href: '/it/contatti',
-      icon: '📧',
-    },
+    }
   ];
 
   return (

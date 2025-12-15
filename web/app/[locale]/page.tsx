@@ -2,6 +2,7 @@ import { getTranslations } from 'next-intl/server';
 import { getExperiences, getActiveAvvisi, getPageBySlug } from '@/lib/directus';
 import { getOptimizedImageUrl, getDirectusAssetUrl } from '@/lib/directus';
 import Hero from '@/components/ui/Hero';
+import StorySection from '@/components/StorySection';
 import ExperiencesSection from '@/components/ExperiencesSection';
 import BusinessSection from '@/components/BusinessSection';
 import EventiSection from '@/components/EventiSection';
@@ -47,6 +48,9 @@ export default async function HomePage() {
 
       {/* Avvisi Modal */}
       <AvvisiModal avvisi={avvisiWithImages} />
+
+      {/* Story Section */}
+      <StorySection />
 
       {/* Experiences Section */}
       <ExperiencesSection

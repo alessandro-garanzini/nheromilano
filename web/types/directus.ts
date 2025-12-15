@@ -31,6 +31,7 @@ export interface Globals {
   linkedin?: string;
   reservation_url?: string;
   delivery_url?: string;
+  menu_url?: string;
 }
 
 export interface OpeningHour {

@@ -62,8 +62,8 @@ export default function FloatingDock({
     { 
       icon: MenuIcon, 
       label: t('menu'), 
-      href: '/menu',
-      external: false
+      href: 'https://www.jmenu.it/menu-nhero-milano/',
+      external: true
     },
     { 
       icon: Phone, 
