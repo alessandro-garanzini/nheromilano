@@ -32,7 +32,7 @@ export default async function LocaleLayout({
   return (
     <NextIntlClientProvider messages={messages}>
       <div className="frame-content">
-        <Navigation />
+        <Navigation menuUrl={globals?.menu_url} />
         <main>
           {children}
         </main>

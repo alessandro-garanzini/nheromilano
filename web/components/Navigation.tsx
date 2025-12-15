@@ -9,7 +9,11 @@ import { useState, useEffect } from 'react';
 import LanguageSwitcher from './LanguageSwitcher';
 import { BlurFade } from './ui/BlurFade';
 
-export default function Navigation() {
+interface NavigationProps {
+  menuUrl?: string | null;
+}
+
+export default function Navigation({ menuUrl }: NavigationProps) {
   const t = useTranslations('nav');
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
@@ -41,12 +45,12 @@ export default function Navigation() {
   }, [isMobileMenuOpen]);
 
   const navItems = [
-    { href: '', label: t('home') },
-    { href: '/esperienze', label: t('experiences') },
-    { href: '/menu', label: t('menu') },
-    { href: '/eventi', label: t('events') },
-    { href: '/business', label: t('business') },
-    { href: '/contatti', label: t('contacts') },
+    { href: '', label: t('home'), type: 'link' as const },
+    { href: '#esperienze', label: t('experiences'), type: 'anchor' as const },
+    { href: menuUrl || '/menu', label: t('menu'), type: menuUrl ? 'external' as const : 'link' as const },
+    { href: '#business', label: t('business'), type: 'anchor' as const },
+    { href: '#eventi', label: t('events'), type: 'anchor' as const },
+    { href: '/contatti', label: t('contacts'), type: 'link' as const },
   ];
 
   const getLocalizedPath = (href: string) => {
@@ -54,9 +58,12 @@ export default function Navigation() {
     return `/${locale}${href}`;
   };
 
-  const isActive = (href: string) => {
-    const localizedPath = getLocalizedPath(href);
-    if (href === '') {
+  const isActive = (item: typeof navItems[number]) => {
+    if (item.type === 'anchor' || item.type === 'external') {
+      return false; // Anchors and external links don't have active state
+    }
+    const localizedPath = getLocalizedPath(item.href);
+    if (item.href === '') {
       return pathname === localizedPath;
     }
     return pathname.startsWith(localizedPath);
@@ -101,19 +108,37 @@ export default function Navigation() {
                 offset={10}
                 blur="3px"
               >
-                <Link
-                  href={getLocalizedPath(item.href)}
-                  className="relative text-sm font-semibold tracking-wide uppercase transition-colors duration-300 text-nhero-cream hover:text-white"
-                >
-                  {item.label}
-                  {isActive(item.href) && (
-                    <motion.span
-                      className="absolute -bottom-1 left-0 right-0 h-px bg-nhero-cream"
-                      layoutId="nav-underline"
-                      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                    />
-                  )}
-                </Link>
+                {item.type === 'external' ? (
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="relative text-sm font-semibold tracking-wide uppercase transition-colors duration-300 text-nhero-cream hover:text-white"
+                  >
+                    {item.label}
+                  </a>
+                ) : item.type === 'anchor' ? (
+                  <a
+                    href={item.href}
+                    className="relative text-sm font-semibold tracking-wide uppercase transition-colors duration-300 text-nhero-cream hover:text-white"
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <Link
+                    href={getLocalizedPath(item.href)}
+                    className="relative text-sm font-semibold tracking-wide uppercase transition-colors duration-300 text-nhero-cream hover:text-white"
+                  >
+                    {item.label}
+                    {isActive(item) && (
+                      <motion.span
+                        className="absolute -bottom-1 left-0 right-0 h-px bg-nhero-cream"
+                        layoutId="nav-underline"
+                        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                      />
+                    )}
+                  </Link>
+                )}
               </BlurFade>
             ))}
             {/* <BlurFade
@@ -191,18 +216,38 @@ export default function Navigation() {
                   offset={30}
                   blur="4px"
                 >
-                  <Link
-                    href={getLocalizedPath(item.href)}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className={`block text-3xl font-semibold uppercase tracking-wider transition-colors duration-300 ${
-                      isActive(item.href) ? 'text-nhero-gold' : 'text-nhero-cream hover:text-white'
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
+                  {item.type === 'external' ? (
+                    <a
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="block text-3xl font-semibold uppercase tracking-wider transition-colors duration-300 text-nhero-cream hover:text-white"
+                    >
+                      {item.label}
+                    </a>
+                  ) : item.type === 'anchor' ? (
+                    <a
+                      href={item.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="block text-3xl font-semibold uppercase tracking-wider transition-colors duration-300 text-nhero-cream hover:text-white"
+                    >
+                      {item.label}
+                    </a>
+                  ) : (
+                    <Link
+                      href={getLocalizedPath(item.href)}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className={`block text-3xl font-semibold uppercase tracking-wider transition-colors duration-300 ${
+                        isActive(item) ? 'text-nhero-gold' : 'text-nhero-cream hover:text-white'
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  )}
                 </BlurFade>
               ))}
-              <BlurFade
+              {/* <BlurFade
                 delay={0.15 + navItems.length * 0.08}
                 duration={0.4}
                 direction="up"
@@ -212,7 +257,7 @@ export default function Navigation() {
                 <div className="mt-4">
                   <LanguageSwitcher />
                 </div>
-              </BlurFade>
+              </BlurFade> */}
             </nav>
 
             {/* Logo centered below nav items */}

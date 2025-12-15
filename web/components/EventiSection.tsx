@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function EventiSection() {
   return (
-    <section className="py-20 md:py-32 bg-nhero-green">
+    <section id="eventi" className="py-20 md:py-32 bg-nhero-green">
       <div className="px-6 md:px-12 lg:px-16">
         <div className="max-w-4xl mx-auto">
           <BlurFade delay={0.1} inView inViewMargin="-100px">
