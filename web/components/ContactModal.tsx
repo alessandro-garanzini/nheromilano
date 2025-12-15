@@ -55,10 +55,10 @@ export default function ContactModal({ trigger }: ContactModalProps) {
     if (!result.success) {
       console.log('Validation failed:', result.error);
       const fieldErrors: Partial<Record<keyof ContactFormData, string>> = {};
-      if (result.error?.errors) {
-        result.error.errors.forEach((error) => {
-          const field = error.path[0] as keyof ContactFormData;
-          fieldErrors[field] = error.message;
+      if (result.error?.issues) {
+        result.error.issues.forEach((issue) => {
+          const field = issue.path[0] as keyof ContactFormData;
+          fieldErrors[field] = issue.message;
         });
       }
       console.log('Setting field errors:', fieldErrors);
