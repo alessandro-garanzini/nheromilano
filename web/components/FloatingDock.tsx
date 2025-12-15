@@ -96,12 +96,17 @@ export default function FloatingDock({
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
     >
       <div className="flex items-center justify-center gap-0 px-[var(--frame-border)] h-16">
-        {actions.map((action) => {
+        {actions.map((action, index) => {
           const ActionWrapper = action.external || action.href.startsWith('tel:') ? 'a' : Link;
-          const linkProps = action.external 
+          const linkProps = action.external
             ? { target: '_blank', rel: 'noopener noreferrer' }
             : {};
-          
+
+          // Reduce padding on first and last items to prevent cutoff
+          const isFirst = index === 0;
+          const isLast = index === actions.length - 1;
+          const horizontalPadding = isFirst || isLast ? 'px-3' : 'px-6';
+
           return (
             <motion.div
               key={action.label}
@@ -113,7 +118,7 @@ export default function FloatingDock({
               <ActionWrapper
                 href={action.href}
                 {...linkProps}
-                className="flex flex-col items-center justify-center gap-0.5 px-6 h-full group flex-1"
+                className={`flex flex-col items-center justify-center gap-0.5 ${horizontalPadding} h-full group flex-1`}
                 style={{ color: 'var(--nhero-green)' }}
               >
                 <motion.div
