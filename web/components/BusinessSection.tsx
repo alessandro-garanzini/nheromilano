@@ -1,7 +1,7 @@
 "use client";
 
 import { BlurFade } from "@/components/ui/BlurFade";
-import Link from "next/link";
+import ContactModal from "@/components/ContactModal";
 
 export default function BusinessSection() {
   return (
@@ -32,12 +32,13 @@ export default function BusinessSection() {
 
               {/* CTA */}
               <div className="pt-4">
-                <Link
-                  href="/business"
-                  className="inline-flex items-center justify-center px-8 py-4 bg-nhero-cream text-nhero-green font-medium uppercase tracking-wide text-sm transition-all duration-300 hover:opacity-90"
-                >
-                  Scopri i servizi Business
-                </Link>
+                <ContactModal
+                  trigger={
+                    <button className="inline-flex items-center justify-center px-8 py-4 bg-nhero-cream text-nhero-green font-medium uppercase tracking-wide text-sm transition-all duration-300 hover:opacity-90">
+                      Richiedi informazioni
+                    </button>
+                  }
+                />
               </div>
             </div>
           </BlurFade>

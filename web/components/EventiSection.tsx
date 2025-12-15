@@ -1,7 +1,7 @@
 "use client";
 
 import { BlurFade } from "@/components/ui/BlurFade";
-import Link from "next/link";
+import ContactModal from "@/components/ContactModal";
 
 export default function EventiSection() {
   return (
@@ -36,12 +36,13 @@ export default function EventiSection() {
 
               {/* CTA */}
               <div className="pt-4">
-                <Link
-                  href="/contatti"
-                  className="inline-flex items-center justify-center px-8 py-4 bg-nhero-cream text-nhero-green font-medium uppercase tracking-wide text-sm transition-all duration-300 hover:opacity-90"
-                >
-                  Richiedi informazioni
-                </Link>
+                <ContactModal
+                  trigger={
+                    <button className="inline-flex items-center justify-center px-8 py-4 bg-nhero-cream text-nhero-green font-medium uppercase tracking-wide text-sm transition-all duration-300 hover:opacity-90">
+                      Richiedi informazioni
+                    </button>
+                  }
+                />
               </div>
             </div>
           </BlurFade>
