@@ -66,9 +66,22 @@
       "email": "Email",
       "phone": "Telefono",
       "message": "Messaggio",
-      "submit": "Invia",
+      "messagePlaceholder": "Come possiamo aiutarti?",
+      "captcha": "Quanto fa?",
+      "captchaPlaceholder": "Risultato",
+      "privacyAccept": "Accetto la",
+      "privacyLink": "Privacy Policy",
+      "submit": "Invia Messaggio",
+      "sending": "Invio in corso...",
       "success": "Messaggio inviato con successo!",
-      "error": "Errore nell'invio. Riprova più tardi."
+      "error": "Errore nell'invio. Riprova più tardi.",
+      "validation": {
+        "nameMin": "Il nome deve avere almeno 2 caratteri",
+        "emailInvalid": "Inserisci un indirizzo email valido",
+        "messageMin": "Il messaggio deve avere almeno 10 caratteri",
+        "captchaWrong": "Risposta non corretta",
+        "privacyRequired": "Devi accettare la Privacy Policy"
+      }
     }
   },
   "dock": {
@@ -108,5 +121,210 @@
     "friday": "Venerdì",
     "saturday": "Sabato",
     "sunday": "Domenica"
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "intro": "In conformità con il Regolamento UE 2016/679 (GDPR), la presente informativa descrive come RIAL CAFE' S.R.L. raccoglie, utilizza e protegge i dati personali degli utenti del sito web nheromilano.it",
+    "lastUpdate": "Ultimo aggiornamento",
+    "section1": {
+      "title": "1. Titolare del Trattamento",
+      "company": "RIAL CAFE' S.R.L."
+    },
+    "section2": {
+      "title": "2. Tipologia di Dati Raccolti",
+      "intro": "I dati personali che raccogliamo tramite i moduli di contatto del sito includono:",
+      "item1": {
+        "title": "Dati di contatto",
+        "desc": "Nome, cognome, indirizzo email, numero di telefono"
+      },
+      "item2": {
+        "title": "Dati aziendali",
+        "desc": "Nome della società, tipo di evento, numero di ospiti (per richieste business)"
+      },
+      "item3": {
+        "title": "Comunicazioni",
+        "desc": "Messaggi e note inseriti nei moduli di contatto"
+      }
+    },
+    "section3": {
+      "title": "3. Finalità del Trattamento",
+      "intro": "I dati personali vengono raccolti e trattati per le seguenti finalità:",
+      "purpose1": {
+        "title": "Gestione delle richieste",
+        "desc": "Rispondere alle richieste di informazioni, preventivi e contatti pervenute tramite i form del sito"
+      },
+      "purpose2": {
+        "title": "Prenotazioni",
+        "desc": "Facilitare le prenotazioni attraverso servizi esterni (Dish.co)"
+      },
+      "purpose3": {
+        "title": "Servizi Business",
+        "desc": "Gestire richieste di preventivi per eventi aziendali, catering e convenzioni"
+      },
+      "purpose4": {
+        "title": "Miglioramento del servizio",
+        "desc": "Analizzare le richieste per migliorare la qualità dei servizi offerti"
+      }
+    },
+    "section4": {
+      "title": "4. Base Giuridica del Trattamento",
+      "desc": "Il trattamento dei dati personali si basa sul consenso dell'interessato (art. 6, par. 1, lett. a del GDPR) fornito al momento della compilazione dei form, e sull'esecuzione di misure precontrattuali adottate su richiesta dell'interessato (art. 6, par. 1, lett. b del GDPR)."
+    },
+    "section5": {
+      "title": "5. Conservazione e Archiviazione dei Dati",
+      "intro": "I dati personali vengono conservati secondo i seguenti criteri:",
+      "storage1": {
+        "title": "Durata",
+        "desc": "I dati vengono conservati per il tempo strettamente necessario alle finalità per cui sono stati raccolti e comunque non oltre 24 mesi dalla ricezione, salvo obblighi di legge"
+      },
+      "storage2": {
+        "title": "Sistema di gestione",
+        "desc": "I dati sono archiviati in un sistema di gestione contenuti (CMS) Directus"
+      },
+      "location": "Tutti i dati sono conservati su server ubicati all'interno dell'Unione Europea e gestiti in conformità con il GDPR."
+    },
+    "section6": {
+      "title": "6. Comunicazione a Terzi e Servizi Esterni",
+      "intro": "I dati personali non vengono venduti né ceduti a terzi per finalità di marketing. Tuttavia, per fornire alcuni servizi, ci avvaliamo dei seguenti partner esterni:",
+      "subtitle1": "Servizi di prenotazione",
+      "service1": {
+        "intro": "Per le prenotazioni online, utilizziamo:",
+        "name": "Dish.co",
+        "desc": "Piattaforma di prenotazione online gestita da Dish ApS (Danimarca). Quando utilizzi il sistema di prenotazione, i tuoi dati (nome, email, telefono, numero di persone, data e ora) vengono trasmessi a Dish.co per elaborare la prenotazione",
+        "disclaimer": "Dish.co agisce come responsabile autonomo del trattamento per i dati raccolti attraverso il loro sistema. Ti invitiamo a consultare la Privacy Policy di Dish.co all'indirizzo: https://dish.co/privacy"
+      }
+    },
+    "section7": {
+      "title": "7. Diritti dell'Interessato",
+      "intro": "In qualità di interessato, hai il diritto di:",
+      "right1": "Accesso",
+      "right1desc": "Ottenere conferma dell'esistenza di dati personali che ti riguardano e accedere a tali dati",
+      "right2": "Rettifica",
+      "right2desc": "Rettificare dati inesatti o incompleti",
+      "right3": "Cancellazione",
+      "right3desc": "Richiedere la cancellazione dei dati personali (diritto all'oblio)",
+      "right4": "Limitazione",
+      "right4desc": "Richiedere la limitazione del trattamento",
+      "right5": "Portabilità",
+      "right5desc": "Ricevere i dati in formato strutturato e trasmetterli ad altro titolare",
+      "right6": "Opposizione",
+      "right6desc": "Opporti al trattamento dei dati personali",
+      "right7": "Revoca del consenso",
+      "right7desc": "Revocare il consenso in qualsiasi momento senza pregiudicare la liceità del trattamento basata sul consenso prestato prima della revoca",
+      "contact": "Per esercitare questi diritti, puoi contattarci all'indirizzo email info@nheromilano.it o tramite posta ordinaria all'indirizzo della sede legale. Hai inoltre il diritto di proporre reclamo all'Autorità Garante per la Protezione dei Dati Personali."
+    },
+    "section8": {
+      "title": "8. Misure di Sicurezza",
+      "desc": "Adottiamo misure tecniche e organizzative adeguate per proteggere i dati personali da accessi non autorizzati, perdita, distruzione o alterazione. L'accesso ai dati è limitato al personale autorizzato e i sistemi sono protetti da protocolli di sicurezza conformi alle best practice del settore."
+    },
+    "section9": {
+      "title": "9. Assenza di Profilazione e Decisioni Automatizzate",
+      "desc": "I dati raccolti non vengono utilizzati per attività di profilazione né per processi decisionali automatizzati ai sensi dell'art. 22 del GDPR."
+    },
+    "section10": {
+      "title": "10. Cookie",
+      "desc1": "Per informazioni dettagliate sui cookie utilizzati dal sito, consulta la nostra",
+      "cookieLink": "Cookie Policy"
+    },
+    "section11": {
+      "title": "11. Modifiche alla Privacy Policy",
+      "desc": "Ci riserviamo il diritto di modificare la presente informativa sulla privacy. Eventuali modifiche saranno pubblicate su questa pagina con indicazione della data di ultimo aggiornamento. Ti invitiamo a consultare periodicamente questa pagina per rimanere informato."
+    }
+  },
+  "cookie": {
+    "title": "Cookie Policy",
+    "intro": "Questa pagina fornisce informazioni dettagliate sull'uso dei cookie sul sito nheromilano.it e su come gestirli in conformità con il Regolamento UE 2016/679 (GDPR) e il Provvedimento del Garante Privacy del 8 maggio 2014.",
+    "lastUpdate": "Ultimo aggiornamento",
+    "section1": {
+      "title": "Cosa sono i Cookie",
+      "desc": "I cookie sono piccoli file di testo che vengono memorizzati sul dispositivo dell'utente quando visita un sito web. Permettono al sito di riconoscere il dispositivo e memorizzare informazioni sulle preferenze o azioni passate dell'utente."
+    },
+    "section2": {
+      "title": "Tipologie di Cookie Utilizzati",
+      "intro": "Il sito nheromilano.it utilizza diverse categorie di cookie:",
+      "type1": {
+        "title": "1. Cookie Tecnici (Necessari)",
+        "desc": "Questi cookie sono essenziali per il corretto funzionamento del sito e non possono essere disabilitati nei nostri sistemi. Sono utilizzati esclusivamente per permettere la navigazione e l'utilizzo delle funzionalità del sito:",
+        "cookie1": "Cookie di sessione",
+        "cookie1desc": "Permettono di mantenere la sessione attiva durante la navigazione",
+        "cookie2": "Cookie di preferenze linguistiche",
+        "cookie2desc": "Memorizzano la lingua selezionata dall'utente (italiano/inglese)",
+        "note": "Questi cookie non richiedono il consenso dell'utente in quanto strettamente necessari per la fornitura del servizio."
+      },
+      "type2": {
+        "title": "2. Cookie di Terze Parti",
+        "desc": "Il sito si avvale di servizi esterni che possono installare i propri cookie:",
+        "service1": {
+          "name": "Dish.co - Sistema di Prenotazione",
+          "provider": "Fornitore",
+          "purpose": "Finalità",
+          "purposeDesc": "Widget per la prenotazione online dei tavoli",
+          "url": "URL",
+          "privacy": "Privacy Policy",
+          "note": "Quando interagisci con il widget di prenotazione, Dish.co può impostare cookie per gestire la prenotazione. Questi cookie sono controllati da Dish.co e non da nheromilano.it. Per maggiori informazioni, consulta la Privacy Policy di Dish.co."
+        }
+      },
+      "type3": {
+        "title": "3. Assenza di Cookie Analitici e di Profilazione",
+        "desc": "Il sito nheromilano.it NON utilizza cookie analitici (es. Google Analytics) né cookie di profilazione per tracciare il comportamento degli utenti o mostrare pubblicità personalizzata. Non vengono raccolti dati di navigazione per finalità statistiche o di marketing."
+      }
+    },
+    "section3": {
+      "title": "Durata dei Cookie",
+      "intro": "I cookie utilizzati hanno le seguenti durate:",
+      "duration1": "Cookie di sessione",
+      "duration1desc": "Vengono eliminati automaticamente alla chiusura del browser",
+      "duration2": "Cookie persistenti",
+      "duration2desc": "Il cookie di preferenza linguistica rimane memorizzato fino a cancellazione manuale o per la durata stabilita dal servizio terzo (Dish.co)"
+    },
+    "section4": {
+      "title": "Come Gestire e Disabilitare i Cookie",
+      "intro": "Puoi gestire le preferenze dei cookie attraverso le impostazioni del tuo browser. La maggior parte dei browser consente di:",
+      "browsers": "Istruzioni per browser:",
+      "chrome": "Impostazioni → Privacy e sicurezza → Cookie e altri dati dei siti",
+      "firefox": "Opzioni → Privacy e sicurezza → Cookie e dati dei siti web",
+      "safari": "Preferenze → Privacy → Gestisci i dati dei siti web",
+      "edge": "Impostazioni → Cookie e autorizzazioni sito"
+    },
+    "section5": {
+      "title": "Conseguenze della Disabilitazione dei Cookie",
+      "desc": "La disabilitazione dei cookie tecnici necessari può impedire il corretto funzionamento di alcune funzionalità del sito, come la memorizzazione della lingua preferita. La disabilitazione dei cookie di terze parti (Dish.co) impedirà l'utilizzo del sistema di prenotazione online."
+    },
+    "section6": {
+      "title": "Aggiornamenti della Cookie Policy",
+      "desc": "Questa Cookie Policy può essere aggiornata periodicamente per riflettere modifiche alle nostre pratiche o per altri motivi operativi, legali o normativi. Ti invitiamo a consultare regolarmente questa pagina."
+    },
+    "section7": {
+      "title": "Link ad Altri Siti",
+      "desc1": "Il nostro sito può contenere link a siti esterni. Consultare la",
+      "privacyLink": "Privacy Policy",
+      "desc2": "per maggiori informazioni sui servizi terzi. Non siamo responsabili delle pratiche sulla privacy di altri siti."
+    },
+    "section8": {
+      "title": "Contatti",
+      "desc": "Per domande riguardanti questa Cookie Policy, puoi contattarci tramite la nostra",
+      "contactLink": "pagina contatti"
+    }
+  },
+  "cookieBanner": {
+    "title": "Rispettiamo la tua privacy",
+    "description": "Utilizziamo cookie per migliorare la tua esperienza sul nostro sito. Alcuni cookie sono essenziali per il funzionamento del sito, altri ci aiutano a capire come viene utilizzato e a migliorare i nostri servizi.",
+    "acceptAll": "Accetta Tutto",
+    "necessaryOnly": "Solo Necessari",
+    "customize": "Personalizza",
+    "privacyPolicy": "Privacy Policy",
+    "cookiePolicy": "Cookie Policy",
+    "back": "Indietro",
+    "customizeTitle": "Personalizza le tue preferenze",
+    "customizeDescription": "Scegli quali categorie di cookie desideri attivare. Puoi modificare queste impostazioni in qualsiasi momento.",
+    "necessary": "Cookie Necessari",
+    "necessaryDescription": "Questi cookie sono essenziali per il corretto funzionamento del sito e non possono essere disabilitati.",
+    "analytics": "Cookie Analitici",
+    "analyticsDescription": "Ci aiutano a capire come i visitatori interagiscono con il sito raccogliendo e analizzando informazioni in forma anonima.",
+    "marketing": "Cookie di Marketing",
+    "marketingDescription": "Utilizzati per tracciare i visitatori attraverso diversi siti web per mostrare annunci pertinenti e coinvolgenti.",
+    "alwaysActive": "Sempre attivo",
+    "savePreferences": "Salva Preferenze"
   }
 }
+

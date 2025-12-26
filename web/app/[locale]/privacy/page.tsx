@@ -1,6 +1,6 @@
 import Hero from '@/components/ui/Hero';
-import Section from '@/components/ui/Section';
 import Link from 'next/link';
+import { getTranslations } from 'next-intl/server';
 
 export default async function PrivacyPage({
   params,
@@ -8,102 +8,122 @@ export default async function PrivacyPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  const t = await getTranslations('privacy');
   
   return (
     <>
-      <Hero
-        title="Privacy Policy"
-        height="small"
-      />
+      <div className="bg-nhero-green py-16 px-6">
+        <div className="max-w-4xl mx-auto text-nhero-cream">
+          <h1 className="text-4xl text-nhero-cream mb-8">{t('title')}</h1>
+          <p className="text-lg mb-8 leading-relaxed">
+            {t('intro')}
+          </p>
+          <p className="text-sm opacity-80 mb-12">
+            {t('lastUpdate')}: 26 dicembre 2025
+          </p>
 
-      <Section padding="large">
-        <div className="container">
-          <div className="max-w-3xl mx-auto prose">
-            <h2>Informativa sulla Privacy</h2>
-            
-            <p>
-              In conformità con il Regolamento UE 2016/679 (GDPR), la presente informativa descrive
-              come Nhero Milano raccoglie, utilizza e protegge i dati personali.
+          <h2 className="text-2xl text-nhero-gold mb-4 mt-8">{t('section1.title')}</h2>
+          <p className="mb-6 leading-relaxed">
+            <strong>RIAL CAFE&apos; S.R.L.</strong><br />
+              P.IVA & C.F.: 04338860960<br />
+              Sede legale: Via Felice Casati 44, 20124 Milano (MI)<br />
+              REA: 1740237<br />
+              Email: <a href="mailto:info@nheromilano.it">info@nheromilano.it</a><br />
+              Telefono: <a href="tel:+390229537206">+39 02 2953 7206</a>
             </p>
 
-            <h3>1. Titolare del Trattamento</h3>
-            <p>
-              Nhero Milano<br />
-              [Indirizzo completo]<br />
-              Email: [email]
+            <h2 className="text-2xl text-nhero-gold mb-4 mt-8">{t('section2.title')}</h2>
+            <p className="mb-4 leading-relaxed">
+              {t('section2.intro')}
             </p>
-
-            <h3>2. Dati Raccolti</h3>
-            <p>
-              I dati personali che possiamo raccogliere includono:
-            </p>
-            <ul>
-              <li>Nome e cognome</li>
-              <li>Indirizzo email</li>
-              <li>Numero di telefono</li>
-              <li>Informazioni aziendali (per richieste business)</li>
+            <ul className="mb-6 space-y-2 list-disc list-inside">
+              <li><strong className="text-nhero-gold">{t('section2.item1.title')}:</strong> {t('section2.item1.desc')}</li>
+              <li><strong className="text-nhero-gold">{t('section2.item2.title')}:</strong> {t('section2.item2.desc')}</li>
+              <li><strong className="text-nhero-gold">{t('section2.item3.title')}:</strong> {t('section2.item3.desc')}</li>
             </ul>
 
-            <h3>3. Finalità del Trattamento</h3>
-            <p>
-              I dati vengono trattati per le seguenti finalità:
+            <h2 className="text-2xl text-nhero-gold mb-4 mt-8">{t('section3.title')}</h2>
+            <p className="mb-4 leading-relaxed">
+              {t('section3.intro')}
             </p>
-            <ul>
-              <li>Rispondere alle richieste di contatto</li>
-              <li>Gestire prenotazioni ed eventi</li>
-              <li>Fornire servizi business</li>
-              <li>Migliorare la qualità del servizio</li>
+            <ul className="mb-6 space-y-2 list-disc list-inside">
+              <li><strong className="text-nhero-gold">{t('section3.purpose1.title')}:</strong> {t('section3.purpose1.desc')}</li>
+              <li><strong className="text-nhero-gold">{t('section3.purpose2.title')}:</strong> {t('section3.purpose2.desc')}</li>
+              <li><strong className="text-nhero-gold">{t('section3.purpose3.title')}:</strong> {t('section3.purpose3.desc')}</li>
+              <li><strong className="text-nhero-gold">{t('section3.purpose4.title')}:</strong> {t('section3.purpose4.desc')}</li>
             </ul>
 
-            <h3>4. Base Giuridica</h3>
-            <p>
-              Il trattamento dei dati è basato sul consenso dell'interessato e sull'esecuzione
-              di misure precontrattuali o contrattuali.
+            <h2 className="text-2xl text-nhero-gold mb-4 mt-8">{t('section4.title')}</h2>
+            <p className="mb-6 leading-relaxed">
+              {t('section4.desc')}
             </p>
 
-            <h3>5. Conservazione dei Dati</h3>
-            <p>
-              I dati personali vengono conservati per il tempo necessario alle finalità per cui
-              sono stati raccolti e in conformità con gli obblighi di legge.
+            <h2 className="text-2xl text-nhero-gold mb-4 mt-8">{t('section5.title')}</h2>
+            <p className="mb-4 leading-relaxed">
+              {t('section5.intro')}
             </p>
-
-            <h3>6. Diritti dell'Interessato</h3>
-            <p>
-              L'interessato ha il diritto di:
-            </p>
-            <ul>
-              <li>Accedere ai propri dati personali</li>
-              <li>Rettificare dati inesatti</li>
-              <li>Richiedere la cancellazione dei dati</li>
-              <li>Opporsi al trattamento</li>
-              <li>Richiedere la portabilità dei dati</li>
-              <li>Revocare il consenso in qualsiasi momento</li>
+            <ul className="mb-4 space-y-2 list-disc list-inside">
+              <li><strong className="text-nhero-gold">{t('section5.storage1.title')}:</strong> {t('section5.storage1.desc')}</li>
+              <li><strong className="text-nhero-gold">{t('section5.storage2.title')}:</strong> {t('section5.storage2.desc')}</li>
             </ul>
-
-            <h3>7. Sicurezza</h3>
-            <p>
-              Adottiamo misure tecniche e organizzative adeguate per proteggere i dati personali
-              da accessi non autorizzati, perdita o distruzione.
+            <p className="mb-6 leading-relaxed">
+              {t('section5.location')}
             </p>
 
-            <h3>8. Cookie</h3>
-            <p>
-              Per informazioni sui cookie utilizzati, consultare la nostra{' '}
-              <Link href={`/${locale}/cookie`} className="text-nhero-gold hover:underline">Cookie Policy</Link>.
+            <h2 className="text-2xl text-nhero-gold mb-4 mt-8">{t('section6.title')}</h2>
+            <p className="mb-4 leading-relaxed">
+              {t('section6.intro')}
+            </p>
+            <h3 className="text-xl text-nhero-gold/80 mb-3 mt-6">{t('section6.subtitle1')}</h3>
+            <p className="mb-4 leading-relaxed">
+              {t('section6.service1.intro')}
+            </p>
+            <ul className="mb-4 space-y-2 list-disc list-inside">
+              <li><strong className="text-nhero-gold">{t('section6.service1.name')}:</strong> {t('section6.service1.desc')}</li>
+            </ul>
+            <p className="mb-6 leading-relaxed italic opacity-90">
+              {t('section6.service1.disclaimer')}
             </p>
 
-            <h3>9. Modifiche</h3>
-            <p>
-              Ci riserviamo il diritto di modificare questa informativa. Le modifiche saranno
-              pubblicate su questa pagina.
+            <h2 className="text-2xl text-nhero-gold mb-4 mt-8">{t('section7.title')}</h2>
+            <p className="mb-4 leading-relaxed">
+              {t('section7.intro')}
+            </p>
+            <ul className="mb-4 space-y-2 list-disc list-inside">
+              <li><strong className="text-nhero-gold">{t('section7.right1')}:</strong> {t('section7.right1desc')}</li>
+              <li><strong className="text-nhero-gold">{t('section7.right2')}:</strong> {t('section7.right2desc')}</li>
+              <li><strong className="text-nhero-gold">{t('section7.right3')}:</strong> {t('section7.right3desc')}</li>
+              <li><strong className="text-nhero-gold">{t('section7.right4')}:</strong> {t('section7.right4desc')}</li>
+              <li><strong className="text-nhero-gold">{t('section7.right5')}:</strong> {t('section7.right5desc')}</li>
+              <li><strong className="text-nhero-gold">{t('section7.right6')}:</strong> {t('section7.right6desc')}</li>
+              <li><strong className="text-nhero-gold">{t('section7.right7')}:</strong> {t('section7.right7desc')}</li>
+            </ul>
+            <p className="mb-6 leading-relaxed">
+              {t('section7.contact')}
             </p>
 
-            <p className="text-sm text-muted mt-12">
-              Ultimo aggiornamento: Dicembre 2025
+            <h2 className="text-2xl text-nhero-gold mb-4 mt-8">{t('section8.title')}</h2>
+            <p className="mb-6 leading-relaxed">
+              {t('section8.desc')}
+            </p>
+
+            <h2 className="text-2xl text-nhero-gold mb-4 mt-8">{t('section9.title')}</h2>
+            <p className="mb-6 leading-relaxed">
+              {t('section9.desc')}
+            </p>
+
+            <h2 className="text-2xl text-nhero-gold mb-4 mt-8">{t('section10.title')}</h2>
+            <p className="mb-6 leading-relaxed">
+              {t('section10.desc1')}{' '}
+              <Link href={`/${locale}/cookie`} className="text-nhero-gold hover:underline">{t('section10.cookieLink')}</Link>.
+            </p>
+
+            <h2 className="text-2xl text-nhero-gold mb-4 mt-8">{t('section11.title')}</h2>
+            <p className="mb-6 leading-relaxed">
+              {t('section11.desc')}
             </p>
           </div>
         </div>
-      </Section>
     </>
   );
 }

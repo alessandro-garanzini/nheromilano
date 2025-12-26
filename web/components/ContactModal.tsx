@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { z } from 'zod';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, AlertCircle, Loader2 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import {
   Dialog,
   DialogContent,
@@ -13,24 +14,57 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 
-const contactSchema = z.object({
-  name: z.string().min(2, 'Il nome deve avere almeno 2 caratteri'),
-  email: z.string().email('Inserisci un indirizzo email valido'),
+// Schema will be created dynamically with correct error messages
+const createContactSchema = (t: (key: string) => string, captchaAnswer: number) => z.object({
+  name: z.string().min(2, t('contacts.form.validation.nameMin')),
+  email: z.string().email(t('contacts.form.validation.emailInvalid')),
   phone: z.string().optional(),
-  message: z.string().min(10, 'Il messaggio deve avere almeno 10 caratteri'),
+  message: z.string().min(10, t('contacts.form.validation.messageMin')),
+  captcha: z.string().refine(
+    (val) => parseInt(val) === captchaAnswer,
+    { message: t('contacts.form.validation.captchaWrong') }
+  ),
+  privacyPolicy: z.literal('on', {
+    message: t('contacts.form.validation.privacyRequired')
+  }),
 });
-
-type ContactFormData = z.infer<typeof contactSchema>;
 
 interface ContactModalProps {
   trigger: React.ReactNode;
 }
 
+type CaptchaQuestion = {
+  num1: number;
+  num2: number;
+  answer: number;
+  question: string;
+};
+
 export default function ContactModal({ trigger }: ContactModalProps) {
+  const t = useTranslations();
   const [open, setOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
-  const [errors, setErrors] = useState<Partial<Record<keyof ContactFormData, string>>>({});
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [captcha, setCaptcha] = useState<CaptchaQuestion | null>(null);
+
+  // Generate a simple math captcha
+  const generateCaptcha = (): CaptchaQuestion => {
+    const num1 = Math.floor(Math.random() * 10) + 1;
+    const num2 = Math.floor(Math.random() * 10) + 1;
+    return {
+      num1,
+      num2,
+      answer: num1 + num2,
+      question: `${num1} + ${num2}`,
+    };
+  };
+
+  useEffect(() => {
+    if (open) {
+      setCaptcha(generateCaptcha());
+    }
+  }, [open]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     console.log('Form submit triggered');
@@ -38,26 +72,34 @@ export default function ContactModal({ trigger }: ContactModalProps) {
     setErrors({});
     setStatus('idle');
 
+    if (!captcha) {
+      console.error('Captcha not initialized');
+      return;
+    }
+
     const formData = new FormData(e.currentTarget);
     const data = {
       name: formData.get('name') as string,
       email: formData.get('email') as string,
       phone: formData.get('phone') as string,
       message: formData.get('message') as string,
+      captcha: formData.get('captcha') as string,
+      privacyPolicy: formData.get('privacyPolicy') as string,
     };
 
     console.log('Form data:', data);
 
     // Validate with zod
+    const contactSchema = createContactSchema(t, captcha.answer);
     const result = contactSchema.safeParse(data);
     console.log('Validation result:', result);
     
     if (!result.success) {
       console.log('Validation failed:', result.error);
-      const fieldErrors: Partial<Record<keyof ContactFormData, string>> = {};
+      const fieldErrors: Record<string, string> = {};
       if (result.error?.issues) {
         result.error.issues.forEach((issue) => {
-          const field = issue.path[0] as keyof ContactFormData;
+          const field = issue.path[0] as string;
           fieldErrors[field] = issue.message;
         });
       }
@@ -80,6 +122,7 @@ export default function ContactModal({ trigger }: ContactModalProps) {
       if (response.ok) {
         setStatus('success');
         (e.target as HTMLFormElement).reset();
+        setCaptcha(generateCaptcha());
         // Close modal after success
         setTimeout(() => {
           setOpen(false);
@@ -93,6 +136,7 @@ export default function ContactModal({ trigger }: ContactModalProps) {
     } catch (error) {
       console.error('Fetch error:', error);
       setStatus('error');
+      setCaptcha(generateCaptcha());
     } finally {
       setIsSubmitting(false);
     }
@@ -117,7 +161,7 @@ export default function ContactModal({ trigger }: ContactModalProps) {
     text-xs text-red-400 mt-1 font-medium
   `;
 
-  const getInputClasses = (fieldName: keyof ContactFormData) => `
+  const getInputClasses = (fieldName: string) => `
     ${inputClasses} ${errors[fieldName] ? 'border-red-400 border-2' : ''}
   `;
 
@@ -186,17 +230,63 @@ export default function ContactModal({ trigger }: ContactModalProps) {
 
           <div>
             <label htmlFor="modal-message" className={labelClasses}>
-              Messaggio <span className="text-nhero-gold">*</span>
+              {t('contacts.form.message')} <span className="text-nhero-gold">*</span>
             </label>
             <textarea
               id="modal-message"
               name="message"
               rows={4}
-              placeholder="Come possiamo aiutarti?"
+              placeholder={t('contacts.form.messagePlaceholder')}
               className={`${getInputClasses('message')} resize-none`}
             />
             {errors.message && <p className={errorClasses}>{errors.message}</p>}
           </div>
+
+          {/* Captcha */}
+          <div>
+            <label htmlFor="modal-captcha" className={labelClasses}>
+              {t('contacts.form.captcha')} <span className="text-nhero-gold">*</span>
+            </label>
+            <div className="flex items-center gap-3">
+              <div className="flex-1">
+                <input
+                  type="text"
+                  id="modal-captcha"
+                  name="captcha"
+                  placeholder={t('contacts.form.captchaPlaceholder')}
+                  className={getInputClasses('captcha')}
+                  autoComplete="off"
+                />
+              </div>
+              <div className="px-4 py-3 bg-nhero-cream/10 border border-nhero-cream/30 text-nhero-cream font-mono text-lg whitespace-nowrap">
+                {captcha?.question || '...'}
+              </div>
+            </div>
+            {errors.captcha && <p className={errorClasses}>{errors.captcha}</p>}
+          </div>
+
+          {/* Privacy Policy Checkbox */}
+          <div className="flex items-start gap-3">
+            <input
+              type="checkbox"
+              id="modal-privacy"
+              name="privacyPolicy"
+              className="mt-1 w-4 h-4 bg-transparent border-2 border-nhero-cream/30 checked:bg-nhero-gold checked:border-nhero-gold focus:ring-0 focus:ring-offset-0 cursor-pointer"
+            />
+            <label htmlFor="modal-privacy" className="text-xs text-nhero-cream/80 leading-relaxed cursor-pointer">
+              {t('contacts.form.privacyAccept')}{' '}
+              <a 
+                href="/privacy-policy" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-nhero-gold hover:text-nhero-cream underline transition-colors"
+              >
+                {t('contacts.form.privacyLink')}
+              </a>
+              {' '}<span className="text-nhero-gold">*</span>
+            </label>
+          </div>
+          {errors.privacyPolicy && <p className={errorClasses}>{errors.privacyPolicy}</p>}
 
           <AnimatePresence mode="wait">
             {status === 'success' && (
@@ -207,7 +297,7 @@ export default function ContactModal({ trigger }: ContactModalProps) {
                 className="flex items-center gap-3 p-3 bg-nhero-cream/10 border border-nhero-cream/30 text-nhero-cream"
               >
                 <Check className="w-5 h-5 flex-shrink-0 text-nhero-gold" />
-                <span className="text-sm">Messaggio inviato con successo!</span>
+                <span className="text-sm">{t('contacts.form.success')}</span>
               </motion.div>
             )}
 
@@ -219,23 +309,23 @@ export default function ContactModal({ trigger }: ContactModalProps) {
                 className="flex items-center gap-3 p-3 bg-red-500/10 border border-red-500/30 text-red-400"
               >
                 <AlertCircle className="w-5 h-5 flex-shrink-0" />
-                <span className="text-sm">Errore nell&apos;invio. Riprova.</span>
+                <span className="text-sm">{t('contacts.form.error')}</span>
               </motion.div>
             )}
           </AnimatePresence>
 
           <button
             type="submit"
-            disabled={isSubmitting}
+            disabled={isSubmitting || !captcha}
             className="w-full px-8 py-4 bg-nhero-cream text-nhero-green font-medium uppercase tracking-wide text-sm transition-all duration-300 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isSubmitting ? (
               <span className="flex items-center justify-center gap-2">
                 <Loader2 className="w-4 h-4 animate-spin" />
-                Invio in corso...
+                {t('contacts.form.sending')}
               </span>
             ) : (
-              'Invia Messaggio'
+              t('contacts.form.submit')
             )}
           </button>
         </form>

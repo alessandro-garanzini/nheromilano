@@ -1,113 +1,136 @@
 import Hero from '@/components/ui/Hero';
-import Section from '@/components/ui/Section';
+import Link from 'next/link';
+import { getTranslations } from 'next-intl/server';
 
-export default function CookiePage() {
+export default async function CookiePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations('cookie');
+
   return (
     <>
-      <Hero
-        title="Cookie Policy"
-        height="small"
-      />
+      <div className="bg-nhero-green py-16 px-6">
+        <div className="max-w-4xl mx-auto text-nhero-cream">
+          <h1 className="text-4xl text-nhero-cream mb-8">{t('title')}</h1>
+          <p className="text-lg mb-8 leading-relaxed">
+            {t('intro')}
+          </p>
+          <p className="text-sm opacity-80 mb-12">
+            {t('lastUpdate')}: 26 dicembre 2025
+          </p>
 
-      <Section background="vanilla">
-        <div className="container mx-auto px-6 max-w-4xl">
-          <div className="prose prose-lg max-w-none">
-            <h2>Informativa sui Cookie</h2>
-            
-            <p>
-              Questa pagina fornisce informazioni dettagliate sull'uso dei cookie su questo sito web
-              e su come gestirli.
+          <h2 className="text-2xl text-nhero-gold mb-4 mt-8">{t('section1.title')}</h2>
+          <p className="mb-6 leading-relaxed">
+            {t('section1.desc')}
+          </p>
+
+          <h2 className="text-2xl text-nhero-gold mb-4 mt-8">{t('section2.title')}</h2>
+          <p className="mb-4 leading-relaxed">
+            {t('section2.intro')}
+          </p>
+
+          <h3 className="text-xl text-nhero-gold mb-3 mt-6">{t('section2.type1.title')}</h3>
+          <p className="mb-4 leading-relaxed">
+            {t('section2.type1.desc')}
+          </p>
+          <ul className="mb-4 space-y-2 list-disc list-inside">
+            <li><strong className="text-nhero-gold">{t('section2.type1.cookie1')}:</strong> {t('section2.type1.cookie1desc')}</li>
+            <li><strong className="text-nhero-gold">{t('section2.type1.cookie2')}:</strong> {t('section2.type1.cookie2desc')}</li>
+          </ul>
+          <p className="text-sm opacity-80 italic mb-6">
+            {t('section2.type1.note')}
+          </p>
+
+          <h3 className="text-xl text-nhero-gold mb-3 mt-6">{t('section2.type2.title')}</h3>
+          <p className="mb-4 leading-relaxed">
+            {t('section2.type2.desc')}
+          </p>
+          <div className="bg-nhero-green/20 p-6 rounded-lg my-6 border border-nhero-gold/20">
+            <h4 className="text-base font-semibold mb-3 text-nhero-gold">{t('section2.type2.service1.name')}</h4>
+            <p className="text-sm mb-2 leading-relaxed">
+              <strong className="text-nhero-gold">{t('section2.type2.service1.provider')}:</strong> Dish ApS (Denmark)<br />
+              <strong className="text-nhero-gold">{t('section2.type2.service1.purpose')}:</strong> {t('section2.type2.service1.purposeDesc')}<br />
+              <strong className="text-nhero-gold">{t('section2.type2.service1.url')}:</strong>{' '}
+              <a href="https://reservation.dish.co/widget/hydra-d45ad7a0-3933-11ea-a927-092f3aaa170a" target="_blank" rel="noopener noreferrer" className="text-nhero-gold hover:underline break-all">
+                reservation.dish.co
+              </a><br />
+              <strong className="text-nhero-gold">{t('section2.type2.service1.privacy')}:</strong>{' '}
+              <a href="https://dish.co/privacy" target="_blank" rel="noopener noreferrer" className="text-nhero-gold hover:underline">
+                dish.co/privacy
+              </a>
             </p>
-
-            <h3>Cosa sono i Cookie</h3>
-            <p>
-              I cookie sono piccoli file di testo che vengono memorizzati sul dispositivo
-              dell'utente quando visita un sito web. Vengono utilizzati per migliorare
-              l'esperienza di navigazione e fornire funzionalità specifiche.
-            </p>
-
-            <h3>Tipologie di Cookie Utilizzati</h3>
-
-            <h4>1. Cookie Tecnici (Necessari)</h4>
-            <p>
-              Questi cookie sono essenziali per il corretto funzionamento del sito e non possono
-              essere disabilitati. Includono:
-            </p>
-            <ul>
-              <li>Cookie di sessione</li>
-              <li>Cookie per la selezione della lingua</li>
-              <li>Cookie di sicurezza</li>
-            </ul>
-
-            <h4>2. Cookie Analitici</h4>
-            <p>
-              Utilizziamo cookie analitici per comprendere come i visitatori interagiscono con
-              il sito e migliorare l'esperienza utente. Questi dati sono raccolti in forma
-              aggregata e anonima.
-            </p>
-
-            <h4>3. Cookie di Terze Parti</h4>
-            <p>
-              Alcuni servizi di terze parti utilizzati sul sito possono impostare i propri cookie:
-            </p>
-            <ul>
-              <li>Google Maps (per la visualizzazione della mappa)</li>
-              <li>Servizi di prenotazione online</li>
-            </ul>
-
-            <h3>Gestione dei Cookie</h3>
-            <p>
-              Puoi gestire le preferenze dei cookie attraverso le impostazioni del tuo browser:
-            </p>
-            <ul>
-              <li>
-                <strong>Chrome:</strong> Impostazioni → Privacy e sicurezza → Cookie e altri dati dei siti
-              </li>
-              <li>
-                <strong>Firefox:</strong> Opzioni → Privacy e sicurezza → Cookie e dati dei siti web
-              </li>
-              <li>
-                <strong>Safari:</strong> Preferenze → Privacy → Gestisci i dati dei siti web
-              </li>
-              <li>
-                <strong>Edge:</strong> Impostazioni → Cookie e autorizzazioni sito
-              </li>
-            </ul>
-
-            <h3>Durata dei Cookie</h3>
-            <p>
-              I cookie possono essere:
-            </p>
-            <ul>
-              <li><strong>Di sessione:</strong> vengono eliminati quando chiudi il browser</li>
-              <li><strong>Persistenti:</strong> rimangono memorizzati fino alla scadenza o cancellazione manuale</li>
-            </ul>
-
-            <h3>Disabilitazione dei Cookie</h3>
-            <p>
-              Puoi disabilitare l'uso dei cookie, ma ciò potrebbe limitare alcune funzionalità
-              del sito. La disabilitazione dei cookie tecnici necessari potrebbe impedire
-              l'accesso a determinate aree del sito.
-            </p>
-
-            <h3>Aggiornamenti</h3>
-            <p>
-              Questa Cookie Policy può essere aggiornata periodicamente. Ti invitiamo a
-              consultare regolarmente questa pagina per rimanere informato.
-            </p>
-
-            <h3>Contatti</h3>
-            <p>
-              Per domande riguardanti questa Cookie Policy, contattaci all'indirizzo{' '}
-              <a href="/contatti">pagina contatti</a>.
-            </p>
-
-            <p className="text-sm text-nhero-green/60 mt-8">
-              Ultimo aggiornamento: Dicembre 2025
+            <p className="text-sm opacity-80 italic">
+              {t('section2.type2.service1.note')}
             </p>
           </div>
+
+          <h3 className="text-xl text-nhero-gold mb-3 mt-6">{t('section2.type3.title')}</h3>
+          <p className="mb-6 leading-relaxed">
+            {t('section2.type3.desc')}
+          </p>
+
+          <h2 className="text-2xl text-nhero-gold mb-4 mt-8">{t('section3.title')}</h2>
+          <p className="mb-4 leading-relaxed">
+            {t('section3.intro')}
+          </p>
+          <ul className="mb-6 space-y-2 list-disc list-inside">
+            <li><strong className="text-nhero-gold">{t('section3.duration1')}:</strong> {t('section3.duration1desc')}</li>
+            <li><strong className="text-nhero-gold">{t('section3.duration2')}:</strong> {t('section3.duration2desc')}</li>
+          </ul>
+
+          <h2 className="text-2xl text-nhero-gold mb-4 mt-8">{t('section4.title')}</h2>
+          <p className="mb-4 leading-relaxed">
+            {t('section4.intro')}
+          </p>
+          <div className="bg-nhero-green/20 p-6 rounded-lg border border-nhero-gold/20 my-6">
+            <h3 className="text-base font-semibold mb-4 text-nhero-gold">{t('section4.browsers')}</h3>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <strong className="text-nhero-gold">Chrome:</strong> {t('section4.chrome')}
+              </li>
+              <li>
+                <strong className="text-nhero-gold">Firefox:</strong> {t('section4.firefox')}
+              </li>
+              <li>
+                <strong className="text-nhero-gold">Safari:</strong> {t('section4.safari')}
+              </li>
+              <li>
+                <strong className="text-nhero-gold">Edge:</strong> {t('section4.edge')}
+              </li>
+            </ul>
+          </div>
+
+          <h2 className="text-2xl text-nhero-gold mb-4 mt-8">{t('section5.title')}</h2>
+          <p className="mb-6 leading-relaxed">
+            {t('section5.desc')}
+          </p>
+
+          <h2 className="text-2xl text-nhero-gold mb-4 mt-8">{t('section6.title')}</h2>
+          <p className="mb-6 leading-relaxed">
+            {t('section6.desc')}
+          </p>
+
+          <h2 className="text-2xl text-nhero-gold mb-4 mt-8">{t('section7.title')}</h2>
+          <p className="mb-6 leading-relaxed">
+            {t('section7.desc1')}{' '}
+            <Link href={`/${locale}/privacy`} className="text-nhero-gold hover:underline">{t('section7.privacyLink')}</Link>{' '}
+            {t('section7.desc2')}
+          </p>
+
+          <h2 className="text-2xl text-nhero-gold mb-4 mt-8">{t('section8.title')}</h2>
+          <p className="mb-6 leading-relaxed">
+            Per domande riguardanti questa Cookie Policy, contattaci all'indirizzo{' '}
+            <a href="/contatti" className="text-nhero-gold hover:underline">pagina contatti</a>.
+          </p>
+
+          <p className="text-sm opacity-80 mt-8">
+            Ultimo aggiornamento: Dicembre 2025
+          </p>
         </div>
-      </Section>
+      </div>
     </>
   );
 }

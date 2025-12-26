@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { Instagram, Facebook, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
 import type { Globals } from '@/types/directus';
 
@@ -120,12 +121,12 @@ export default function Footer({ globals }: FooterProps) {
             </div>
           </div>
           <div className="flex gap-4">
-            <a href="/privacy-policy" className="hover:text-nhero-gold transition-colors duration-300">
+            <Link href="/privacy" className="hover:text-nhero-gold transition-colors duration-300">
               Privacy Policy
-            </a>
-            <a href="/cookie-policy" className="hover:text-nhero-gold transition-colors duration-300">
+            </Link>
+            <Link href="/cookie" className="hover:text-nhero-gold transition-colors duration-300">
               Cookie Policy
-            </a>
+            </Link>
           </div>
         </div>
       </div>

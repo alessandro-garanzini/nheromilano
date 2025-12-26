@@ -66,9 +66,22 @@
       "email": "Email",
       "phone": "Phone",
       "message": "Message",
-      "submit": "Send",
+      "messagePlaceholder": "How can we help you?",
+      "captcha": "What is the result?",
+      "captchaPlaceholder": "Answer",
+      "privacyAccept": "I accept the",
+      "privacyLink": "Privacy Policy",
+      "submit": "Send Message",
+      "sending": "Sending...",
       "success": "Message sent successfully!",
-      "error": "Error sending. Please try again later."
+      "error": "Error sending. Please try again later.",
+      "validation": {
+        "nameMin": "Name must be at least 2 characters",
+        "emailInvalid": "Please enter a valid email address",
+        "messageMin": "Message must be at least 10 characters",
+        "captchaWrong": "Wrong answer",
+        "privacyRequired": "You must accept the Privacy Policy"
+      }
     }
   },
   "dock": {
@@ -108,5 +121,210 @@
     "friday": "Friday",
     "saturday": "Saturday",
     "sunday": "Sunday"
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "intro": "In accordance with EU Regulation 2016/679 (GDPR), this notice describes how RIAL CAFE' S.R.L. collects, uses and protects the personal data of users of the website nheromilano.it",
+    "lastUpdate": "Last updated",
+    "section1": {
+      "title": "1. Data Controller",
+      "company": "RIAL CAFE' S.R.L."
+    },
+    "section2": {
+      "title": "2. Types of Data Collected",
+      "intro": "The personal data we collect through the website contact forms includes:",
+      "item1": {
+        "title": "Contact details",
+        "desc": "Name, surname, email address, phone number"
+      },
+      "item2": {
+        "title": "Business data",
+        "desc": "Company name, event type, number of guests (for business inquiries)"
+      },
+      "item3": {
+        "title": "Communications",
+        "desc": "Messages and notes entered in contact forms"
+      }
+    },
+    "section3": {
+      "title": "3. Purpose of Processing",
+      "intro": "Personal data is collected and processed for the following purposes:",
+      "purpose1": {
+        "title": "Request management",
+        "desc": "Respond to requests for information, quotes and contacts received through the website forms"
+      },
+      "purpose2": {
+        "title": "Reservations",
+        "desc": "Facilitate reservations through external services (Dish.co)"
+      },
+      "purpose3": {
+        "title": "Business Services",
+        "desc": "Manage quote requests for corporate events, catering and conventions"
+      },
+      "purpose4": {
+        "title": "Service improvement",
+        "desc": "Analyze requests to improve the quality of services offered"
+      }
+    },
+    "section4": {
+      "title": "4. Legal Basis for Processing",
+      "desc": "The processing of personal data is based on the consent of the data subject (art. 6, par. 1, lett. a of GDPR) provided when completing the forms, and on the execution of pre-contractual measures taken at the request of the data subject (art. 6, par. 1, lett. b of GDPR)."
+    },
+    "section5": {
+      "title": "5. Data Retention and Storage",
+      "intro": "Personal data is retained according to the following criteria:",
+      "storage1": {
+        "title": "Duration",
+        "desc": "Data is kept for the time strictly necessary for the purposes for which it was collected and in any case no longer than 24 months from receipt, except for legal obligations"
+      },
+      "storage2": {
+        "title": "Management system",
+        "desc": "Data is stored in a Directus content management system (CMS)"
+      },
+      "location": "All data is stored on servers located within the European Union and managed in compliance with GDPR."
+    },
+    "section6": {
+      "title": "6. Communication to Third Parties and External Services",
+      "intro": "Personal data is not sold or transferred to third parties for marketing purposes. However, to provide some services, we use the following external partners:",
+      "subtitle1": "Reservation services",
+      "service1": {
+        "intro": "For online reservations, we use:",
+        "name": "Dish.co",
+        "desc": "Online reservation platform managed by Dish ApS (Denmark). When you use the reservation system, your data (name, email, phone, number of people, date and time) is transmitted to Dish.co to process the reservation",
+        "disclaimer": "Dish.co acts as an independent data controller for data collected through their system. We invite you to consult Dish.co's Privacy Policy at: https://dish.co/privacy"
+      }
+    },
+    "section7": {
+      "title": "7. Data Subject Rights",
+      "intro": "As a data subject, you have the right to:",
+      "right1": "Access",
+      "right1desc": "Obtain confirmation of the existence of personal data concerning you and access to such data",
+      "right2": "Rectification",
+      "right2desc": "Rectify inaccurate or incomplete data",
+      "right3": "Erasure",
+      "right3desc": "Request the deletion of personal data (right to be forgotten)",
+      "right4": "Restriction",
+      "right4desc": "Request restriction of processing",
+      "right5": "Portability",
+      "right5desc": "Receive data in a structured format and transmit it to another controller",
+      "right6": "Objection",
+      "right6desc": "Object to the processing of personal data",
+      "right7": "Withdrawal of consent",
+      "right7desc": "Withdraw consent at any time without affecting the lawfulness of processing based on consent given before withdrawal",
+      "contact": "To exercise these rights, you can contact us at info@nheromilano.it or by regular mail at the registered office address. You also have the right to lodge a complaint with the Data Protection Authority."
+    },
+    "section8": {
+      "title": "8. Security Measures",
+      "desc": "We adopt appropriate technical and organizational measures to protect personal data from unauthorized access, loss, destruction or alteration. Access to data is limited to authorized personnel and systems are protected by security protocols compliant with industry best practices."
+    },
+    "section9": {
+      "title": "9. Absence of Profiling and Automated Decisions",
+      "desc": "The collected data is not used for profiling activities or automated decision-making processes pursuant to art. 22 of GDPR."
+    },
+    "section10": {
+      "title": "10. Cookies",
+      "desc1": "For detailed information about cookies used by the site, please consult our",
+      "cookieLink": "Cookie Policy"
+    },
+    "section11": {
+      "title": "11. Changes to Privacy Policy",
+      "desc": "We reserve the right to modify this privacy notice. Any changes will be published on this page with an indication of the last update date. We invite you to consult this page periodically to stay informed."
+    }
+  },
+  "cookie": {
+    "title": "Cookie Policy",
+    "intro": "This page provides detailed information about the use of cookies on the nheromilano.it website and how to manage them in compliance with EU Regulation 2016/679 (GDPR) and the Privacy Authority Provision of May 8, 2014.",
+    "lastUpdate": "Last updated",
+    "section1": {
+      "title": "What are Cookies",
+      "desc": "Cookies are small text files that are stored on the user's device when visiting a website. They allow the site to recognize the device and store information about the user's preferences or past actions."
+    },
+    "section2": {
+      "title": "Types of Cookies Used",
+      "intro": "The nheromilano.it website uses different categories of cookies:",
+      "type1": {
+        "title": "1. Technical Cookies (Necessary)",
+        "desc": "These cookies are essential for the proper functioning of the site and cannot be disabled in our systems. They are used exclusively to allow navigation and use of the site's features:",
+        "cookie1": "Session cookies",
+        "cookie1desc": "Allow maintaining an active session during navigation",
+        "cookie2": "Language preference cookies",
+        "cookie2desc": "Store the language selected by the user (Italian/English)",
+        "note": "These cookies do not require user consent as they are strictly necessary for the provision of the service."
+      },
+      "type2": {
+        "title": "2. Third-Party Cookies",
+        "desc": "The site uses external services that may install their own cookies:",
+        "service1": {
+          "name": "Dish.co - Reservation System",
+          "provider": "Provider",
+          "purpose": "Purpose",
+          "purposeDesc": "Widget for online table reservations",
+          "url": "URL",
+          "privacy": "Privacy Policy",
+          "note": "When you interact with the reservation widget, Dish.co may set cookies to manage the reservation. These cookies are controlled by Dish.co and not by nheromilano.it. For more information, consult Dish.co's Privacy Policy."
+        }
+      },
+      "type3": {
+        "title": "3. Absence of Analytics and Profiling Cookies",
+        "desc": "The nheromilano.it website DOES NOT use analytics cookies (e.g. Google Analytics) or profiling cookies to track user behavior or display personalized advertising. No browsing data is collected for statistical or marketing purposes."
+      }
+    },
+    "section3": {
+      "title": "Cookie Duration",
+      "intro": "The cookies used have the following durations:",
+      "duration1": "Session cookies",
+      "duration1desc": "Are automatically deleted when the browser is closed",
+      "duration2": "Persistent cookies",
+      "duration2desc": "The language preference cookie remains stored until manual deletion or for the duration established by the third-party service (Dish.co)"
+    },
+    "section4": {
+      "title": "How to Manage and Disable Cookies",
+      "intro": "You can manage cookie preferences through your browser settings. Most browsers allow you to:",
+      "browsers": "Browser instructions:",
+      "chrome": "Settings → Privacy and security → Cookies and other site data",
+      "firefox": "Options → Privacy and security → Cookies and site data",
+      "safari": "Preferences → Privacy → Manage website data",
+      "edge": "Settings → Cookies and site permissions"
+    },
+    "section5": {
+      "title": "Consequences of Disabling Cookies",
+      "desc": "Disabling necessary technical cookies may prevent the proper functioning of some site features, such as storing the preferred language. Disabling third-party cookies (Dish.co) will prevent the use of the online reservation system."
+    },
+    "section6": {
+      "title": "Cookie Policy Updates",
+      "desc": "This Cookie Policy may be updated periodically to reflect changes to our practices or for other operational, legal or regulatory reasons. We invite you to consult this page regularly."
+    },
+    "section7": {
+      "title": "Links to Other Sites",
+      "desc1": "Our site may contain links to external sites. Please consult the",
+      "privacyLink": "Privacy Policy",
+      "desc2": "for more information about third-party services. We are not responsible for the privacy practices of other sites."
+    },
+    "section8": {
+      "title": "Contact",
+      "desc": "For questions regarding this Cookie Policy, you can contact us through our",
+      "contactLink": "contact page"
+    }
+  },
+  "cookieBanner": {
+    "title": "We respect your privacy",
+    "description": "We use cookies to improve your experience on our site. Some cookies are essential for the site to function, others help us understand how it's used and to improve our services.",
+    "acceptAll": "Accept All",
+    "necessaryOnly": "Necessary Only",
+    "customize": "Customize",
+    "privacyPolicy": "Privacy Policy",
+    "cookiePolicy": "Cookie Policy",
+    "back": "Back",
+    "customizeTitle": "Customize your preferences",
+    "customizeDescription": "Choose which categories of cookies you want to enable. You can change these settings at any time.",
+    "necessary": "Necessary Cookies",
+    "necessaryDescription": "These cookies are essential for the proper functioning of the site and cannot be disabled.",
+    "analytics": "Analytics Cookies",
+    "analyticsDescription": "Help us understand how visitors interact with the site by collecting and analyzing information anonymously.",
+    "marketing": "Marketing Cookies",
+    "marketingDescription": "Used to track visitors across different websites to display relevant and engaging advertisements.",
+    "alwaysActive": "Always active",
+    "savePreferences": "Save Preferences"
   }
 }
+

@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import FloatingDock from '@/components/FloatingDock';
+import CookieBanner from '@/components/CookieBanner';
 import { getGlobals } from '@/lib/directus';
 import { locales } from '@/next-intl.config';
 import type { Globals } from '@/types/directus';
@@ -44,6 +45,7 @@ export default async function LocaleLayout({
         />
       </div>
       <Footer globals={globals} />
+      <CookieBanner />
     </NextIntlClientProvider>
   );
 }
